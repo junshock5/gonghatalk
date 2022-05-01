@@ -5,3 +5,6 @@ htmlcov/
 staticfiles/
 venv/
 *.pyc
+node_modules
+.idea
+venv

@@ -1,23 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Django Channels Example</h1>
-  <p class="deck">
-    This is a demo using <a href="http://channels.readthedocs.org/en/latest/">
-    Django Channels</a> to implement a simple WebSocket-based chat server.
-    You can see the <a href="https://github.com/jacobian/channels-example">
-    code on GitHub</a>, or try the app:
-  </p>
-  <p>
-    <a class="button button-primary" href="{% url 'new_room' %}">Create new chat room</a>
-  </p>
+    <h1>공하톡</h1>
+    <p>
+        공통의 관심사를 가진 사람들의 채팅
+    </p>
+    <p>
+        <a class="button button-primary" href="{% url 'new_room' %}">회원가입</a>
+    </p>
 
-  <p>
-    <a class="button button-success" href="{% url 'app' %}">New Version</a>
-  </p>
-  <p class="quiet">
-    Or, you can visit <code>{{ request.scheme }}://{{ request.get_host }}/any-path-you-want</code> 
-    to create a arbitrary room or join one whose name you know.
-  </p>
+    <p>
+        <a class="button button-success" href="{% url 'app' %}">채팅하기</a>
+    </p>
+    <p>
+        © Gonghatalk Corporation All Rights Reserved by 2022.
+    </p>
 
 {% endblock content %}
