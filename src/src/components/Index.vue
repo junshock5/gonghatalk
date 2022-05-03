@@ -11,6 +11,15 @@
       </div>
     </div>
 
+    <div id="buttons2">
+      <div
+        id="createButton2"
+        class="ui huge grey basic button"
+        @click="createRoom2">
+        로그인
+      </div>
+    </div>
+
     <div id="roomlist" class="ui segment">
       <div class="ui selection list">
         <div class="nomobile item" style="padding: 1em;">
@@ -81,6 +90,9 @@ export default {
       this.$http.post('api/room/').then((response) => {
         this.$router.push({name: 'room', query: {label: response.body["label"]}})
       })
+    },
+    createRoom2() {
+      this.$router.push({name: 'Login'});
     }
   },
 
