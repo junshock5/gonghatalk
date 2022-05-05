@@ -1,12 +1,12 @@
 <template>
   <div>
-<!--    <ContentHeader-->
-<!--        :title="title"-->
-<!--        :bread-crumb="breadCrumb"-->
-<!--    />-->
+    <!--    <ContentHeader-->
+    <!--        :title="title"-->
+    <!--        :bread-crumb="breadCrumb"-->
+    <!--    />-->
     <h1>공하톡</h1>
     <p>
-        공통의 관심사를 가진 사람들의 채팅
+      공통의 관심사를 가진 사람들의 채팅
     </p>
     <p>
     <div id="buttons1">
@@ -30,7 +30,7 @@
     </div>
     </p>
     <p>
-        © Gonghatalk Corporation All Rights Reserved by 2022.
+      © Gonghatalk Corporation All Rights Reserved by 2022.
     </p>
   </div>
 </template>
@@ -61,7 +61,7 @@ export default {
     };
   },
   methods: {
-        register() {
+    register() {
       this.$router.push({name: 'Login'});
     },
     chatting() {

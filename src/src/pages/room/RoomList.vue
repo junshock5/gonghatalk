@@ -79,7 +79,7 @@ export default {
   methods: {
     createRoom() {
       this.$http.post('api/room/').then((response) => {
-        this.$router.push({name: 'room', query: {label: response.body["label"]}})
+        this.$router.push({name: 'Room', query: {label: response.body["label"]}})
       })
     },
   },
