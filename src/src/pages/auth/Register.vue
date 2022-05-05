@@ -8,7 +8,7 @@
               <div class="col-7">
                 <div class="text-primary p-4">
                   <h5 class="text-primary">Free Register</h5>
-                  <p>Get your free Skote account now.</p>
+                  <p>Get your free Gonghatalk account now.</p>
                 </div>
               </div>
               <div class="col-5 align-self-end">
@@ -81,6 +81,7 @@
 <!--                >-->
 <!--                  Username is required.-->
 <!--                </div>-->
+                <input type="text" class="form-control" id="userName" v-model="userName">
               </b-form-group>
 
               <b-form-group class="mb-3" id="fullname-group" label="Email" label-for="email">
@@ -100,6 +101,7 @@
 <!--                    >Please enter valid email.</span-->
 <!--                  >-->
 <!--                </div>-->
+                <input type="text" class="form-control" id="userEmail" v-model="userEmail">
               </b-form-group>
 
               <b-form-group
@@ -123,6 +125,7 @@
 <!--                >-->
 <!--                  Password is required.-->
 <!--                </div>-->
+                <input type="text" class="form-control" id="userPassword" v-model="userPassword">
               </b-form-group>
 
               <div class="mt-4 d-grid">
@@ -164,7 +167,7 @@
 
               <div class="mt-4 text-center">
                 <p class="mb-0">
-                  By registering you agree to the Skote
+                  By registering you agree to the Gonghatalk
                   <a href="javascript: void(0);" class="text-primary"
                     >Terms of Use</a
                   >
@@ -187,7 +190,7 @@
             >
           </p>
           <p>
-            © {{ new Date().getFullYear() }} Skote. Crafted with
+            © {{ new Date().getFullYear() }} Gonghatalk. Crafted with
             <i class="mdi mdi-heart text-danger"></i> by Themesbrand
           </p>
         </div>
@@ -206,6 +209,13 @@ export default {
   name: 'Register',
   components: {
     Layout,
+  },
+  data() {
+    return {
+      userName: '',
+      userEmail: '',
+      userPassword: '',
+    };
   },
 };
 </script>

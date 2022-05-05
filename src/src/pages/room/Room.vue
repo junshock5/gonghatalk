@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link :to="{ name: 'index' }">
+        <router-link :to="{ name: 'RoomList' }">
             <div style="position: absolute; left: 10px; top: 10px;" class="ui green basic button icon">
                 <i class="home icon"></i>
             </div>
@@ -11,10 +11,10 @@
 
             <div class="ui mobile divider"></div>
             <div class="ui divided selection list">
-                <div 
+                <div
                     v-for="(message, index) in messages"
                     :key="index"
-                    style="padding: 1em;" 
+                    style="padding: 1em;"
                     :class="{new: isNew(message)}"
                     class="item">
                     <div class="ui stackable grid">

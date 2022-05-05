@@ -46,7 +46,7 @@
                             </span>
             </div>
             <div class="four wide column nomobile">
-              <router-link :to="{ name: 'room', query: { label: room.label }}">
+              <router-link :to="{ name: 'Room', query: { label: room.label }}">
                 <h5 style="float: right;" class="ui green header">입장</h5>
               </router-link>
             </div>
