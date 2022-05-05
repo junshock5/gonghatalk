@@ -3,6 +3,11 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+// const router = new Router({
+//   mode: 'history',
+//   routes: routingList,
+// });
+
 export default new Router({
   routes: [
     {
@@ -36,4 +41,4 @@ export default new Router({
       component: resolve => require(['@/pages/room/RoomList'], resolve)
     }
   ]
-})
+});

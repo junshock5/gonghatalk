@@ -7,7 +7,8 @@ import VueResource from 'vue-resource'
 import {BootstrapVue, BootstrapVueIcons} from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../public/stylesheets/base.css';
-// import './assets/design/app.scss';
+import './assets/design/app.scss';
+import store from './store';
 
 window.wsScheme = window.location.protocol == "https:" ? "wss" : "ws";
 
@@ -30,6 +31,7 @@ Vue.config.productionTip = false;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   template: '<App/>',
   components: {App}

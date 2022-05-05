@@ -1,0 +1,85 @@
+[
+  {
+    "linkToName": "RoomList",
+    "menuName": "조회",
+    "link": "/chat",
+    "icon": "bx bx-chat",
+    "label": "채팅"
+  },
+  {
+    "linkToName": "Setting",
+    "menuName": "설정",
+    "link": "/setting/category",
+    "icon": "bx-cog",
+    "label": "설정",
+    "children": [
+      {
+        "linkToName": "Login",
+        "menuName": "카테고리",
+        "parent": "Setting",
+        "link": "/setting/Login",
+        "label": "프로필"
+      },
+      {
+        "linkToName": "Category",
+        "menuName": "템플릿",
+        "parent": "Setting",
+        "link": "/setting/Category",
+        "label": "계정"
+      }
+    ]
+  },
+  {
+    "linkToName": "Cabinet",
+    "menuName": "조회",
+    "link": "/Cabinet",
+    "icon": "bx-file-find",
+    "label": "소모임"
+  },
+  {
+    "linkToName": "CabinetDetail",
+    "menuName": "조회",
+    "link": "/CabinetDetail",
+    "icon": "bx-file-find",
+    "label": "내모임"
+  },
+  {
+    "linkToName": "NPocketSetting",
+    "menuName": "Setting",
+    "link": "/setting",
+    "icon": "bx-mobile",
+    "label": "설정",
+    "children": [
+      {
+        "linkToName": "NpocketService",
+        "menuName": "서비스",
+        "parent": "NPocketSetting",
+        "link": "/npocket/setting/NpocketService",
+        "label": "관심사 설정"
+      }
+    ]
+  },
+  {
+    "linkToName": "Management",
+    "menuName": "관리자",
+    "link": "/management",
+    "icon": "bx-slider",
+    "label": "친구 찾기",
+    "children": [
+      {
+        "linkToName": "ManagementService",
+        "menuName": "서비스관리",
+        "parent": "Management",
+        "link": "/management/ManagementService",
+        "label": "동네 친구"
+      },
+      {
+        "linkToName": "Server",
+        "menuName": "서버관리",
+        "parent": "Management",
+        "link": "/management/Server",
+        "label": "이성 친구"
+      }
+    ]
+  }
+]

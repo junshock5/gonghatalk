@@ -5,8 +5,13 @@
 </template>
 
 <script>
+import feather from 'feather-icons';
+
 export default {
-  name: 'app'
+  name: 'app',
+  mounted() {
+    feather.replace();
+  },
 }
 </script>
 
