@@ -8,7 +8,6 @@
     <p>
       공통의 관심사를 가진 사람들의 채팅
     </p>
-    <p>
     <div id="buttons1">
       <div
         id="createButton1"
@@ -17,9 +16,7 @@
         회원가입
       </div>
     </div>
-    </p>
 
-    <p>
     <div id="buttons2">
       <div
         id="createButton2"
@@ -28,7 +25,6 @@
         채팅하기
       </div>
     </div>
-    </p>
     <p>
       © Gonghatalk Corporation All Rights Reserved by 2022.
     </p>

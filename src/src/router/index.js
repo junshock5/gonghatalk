@@ -11,9 +11,19 @@ export default new Router({
       component: resolve => require(['@/pages/index/Index'], resolve)
     },
     {
-      path: '/Login',
+      path: '/login',
       name: 'Login',
-      component: resolve => require(['@/pages/login/Login'], resolve)
+      component: resolve => require(['@/pages/auth/Login'], resolve)
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: resolve => require(['@/pages/auth/Register'], resolve)
+    },
+    {
+      path: '/forgotpassword',
+      name: 'ForgotPassword',
+      component: resolve => require(['@/pages/auth/ForgotPassword'], resolve)
     },
     {
       path: '/room',

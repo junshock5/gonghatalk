@@ -135,7 +135,7 @@
                 </ul>
               </div>
               <div class="mt-4 text-center">
-                <router-link tag="a" to="/forgot-password" class="text-muted">
+                <router-link tag="a" to="/forgotpassword" class="text-muted">
                   <i class="mdi mdi-lock me-1"></i> Forgot your password?
                 </router-link>
               </div>
