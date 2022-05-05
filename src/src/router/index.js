@@ -39,6 +39,11 @@ export default new Router({
       path: '/roomList',
       name: 'RoomList',
       component: resolve => require(['@/pages/room/RoomList'], resolve)
-    }
+    },
+      {
+        path: 'chat',
+        name: 'Chat',
+        component: () => import('@/pages/chat/Chat'),
+      },
   ]
 });

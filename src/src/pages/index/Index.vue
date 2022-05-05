@@ -14,30 +14,6 @@
         </div>
       </div>
     </div>
-    <!--    <h1>공하톡</h1>-->
-    <!--    <p>-->
-    <!--      공통의 관심사를 가진 사람들의 채팅-->
-    <!--    </p>-->
-    <!--    <div id="buttons1">-->
-    <!--      <div-->
-    <!--        id="createButton1"-->
-    <!--        class="ui huge grey basic button"-->
-    <!--        @click="register">-->
-    <!--        회원가입-->
-    <!--      </div>-->
-    <!--    </div>-->
-
-    <!--    <div id="buttons2">-->
-    <!--      <div-->
-    <!--        id="createButton2"-->
-    <!--        class="ui huge grey basic button"-->
-    <!--        @click="chatting">-->
-    <!--        채팅하기-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <!--    <p>-->
-    <!--      © Gonghatalk Corporation All Rights Reserved by 2022.-->
-    <!--    </p>-->
   </div>
 </template>
 

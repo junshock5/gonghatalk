@@ -1,6 +1,6 @@
 [
   {
-    "linkToName": "RoomList",
+    "linkToName": "Chat",
     "menuName": "조회",
     "link": "/chat",
     "icon": "bx bx-chat",

@@ -59,7 +59,7 @@
           <button
               type="button"
               class="btn header-item noti-icon"
-              @click="logOut"
+              @click="logIn"
           >
             <i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i>
           </button>
@@ -115,9 +115,10 @@ export default {
     };
   },
   methods: {
-    async logOut() {
+    async logIn() {
       // eslint-disable-next-line no-unused-expressions
-      await ApiHelper.SsoApi.Logout();
+      // await ApiHelper.SsoApi.Logout();
+      this.$router.push({name: 'Login'});
     },
     ...mapActions([
       'signIn',
