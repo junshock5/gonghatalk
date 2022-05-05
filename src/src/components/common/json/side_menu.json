@@ -30,7 +30,7 @@
     ]
   },
   {
-    "linkToName": "Cabinet",
+    "linkToName": "RoomList",
     "menuName": "조회",
     "link": "/Cabinet",
     "icon": "bx-file-find",

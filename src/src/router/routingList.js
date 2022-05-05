@@ -7,12 +7,12 @@ const routing = [
       {
         path: 'chat',
         name: 'Chat',
-        component: () => import('@/pages/room/Chat'),
+        component: () => import('@/pages/chat/Chat'),
       },
       {
         path: '/login',
         name: 'Login',
-        component: () => import('@/pages/auth/Login'),
+        component: resolve => require(['@/pages/auth/Login'], resolve)
       },
       {
         path: '/register',
@@ -33,7 +33,7 @@ const routing = [
         path: '/roomList',
         name: 'RoomList',
         component: resolve => require(['@/pages/room/RoomList'], resolve)
-      }
+      },
     ],
   },
   {

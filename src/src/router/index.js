@@ -1,49 +1,26 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
+// import store from '../store';
+import routingList from './routingList';
 
-Vue.use(Router)
+Vue.use(Router);
 
-// const router = new Router({
-//   mode: 'history',
-//   routes: routingList,
-// });
-
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'index',
-      component: resolve => require(['@/pages/index/Index'], resolve)
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: resolve => require(['@/pages/auth/Login'], resolve)
-    },
-    {
-      path: '/register',
-      name: 'Register',
-      component: resolve => require(['@/pages/auth/Register'], resolve)
-    },
-    {
-      path: '/forgotpassword',
-      name: 'ForgotPassword',
-      component: resolve => require(['@/pages/auth/ForgotPassword'], resolve)
-    },
-    {
-      path: '/room',
-      name: 'Room',
-      component: resolve => require(['@/pages/room/Room'], resolve)
-    },
-    {
-      path: '/roomList',
-      name: 'RoomList',
-      component: resolve => require(['@/pages/room/RoomList'], resolve)
-    },
-      {
-        path: 'chat',
-        name: 'Chat',
-        component: () => import('@/pages/chat/Chat'),
-      },
-  ]
+const router = new Router({
+  mode: 'history',
+  routes: routingList,
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((route) => route.meta.requireAdminAuth)) {
+    next();
+    // if (!store.getters.isAdmin) {
+    //   next(false);
+    // } else {
+    //   next();
+    // }
+  } else {
+    next();
+  }
+});
+
+export default router;
