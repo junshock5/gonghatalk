@@ -8,7 +8,7 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: resolve => require(['@/components/Index'], resolve)
+      component: resolve => require(['@/pages/index/Index'], resolve)
     },
     {
       path: '/Login',
@@ -17,8 +17,13 @@ export default new Router({
     },
     {
       path: '/room',
-      name: 'room',
-      component: resolve => require(['@/components/Room'], resolve)
+      name: 'Room',
+      component: resolve => require(['@/pages/room/Room'], resolve)
+    },
+    {
+      path: '/roomList',
+      name: 'RoomList',
+      component: resolve => require(['@/pages/room/RoomList'], resolve)
     }
   ]
 })
