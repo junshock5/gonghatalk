@@ -12,9 +12,9 @@ router.register(r'message', MessageViewSet, base_name="message")
 
 
 urlpatterns = [
-    url(r'^$',  views.about, name='about'),
-    url(r'^app/$',  views.app, name='app'),
-    url(r'^new/$', views.new_room, name='new_room'),
+    # url(r'^$',  views.about, name='about'),
+    url(r'^$',  views.app, name='app'),
+    # url(r'^new/$', views.new_room, name='new_room'),
     url(r'^api/', include(router.urls)),
     url(r'^room/(?P<label>[\w-]{,50})/$', views.chat_room, name='chat_room'),
 ]

@@ -157,7 +157,7 @@
             >
           </p>
           <p>
-            © {{ new Date().getFullYear() }} Skote. Crafted with
+            © {{ new Date().getFullYear() }} Gonghatalk. Crafted with
             <i class="mdi mdi-heart text-danger"></i> by Themesbrand
           </p>
         </div>
