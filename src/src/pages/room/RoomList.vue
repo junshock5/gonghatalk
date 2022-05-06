@@ -1,15 +1,15 @@
 <template>
   <div>
-    <h1 id="header">공하톡</h1>
+<!--    <h1 id="header">공하톡</h1>-->
 
-    <div id="buttons">
-      <div
-        id="createButton"
-        class="ui huge grey basic button"
-        @click="createRoom">
-        채팅방 만들기
-      </div>
-    </div>
+<!--    <div id="buttons">-->
+<!--      <div-->
+<!--        id="createButton"-->
+<!--        class="ui huge grey basic button"-->
+<!--        @click="createRoom">-->
+<!--        채팅방 만들기-->
+<!--      </div>-->
+<!--    </div>-->
 
     <div id="roomlist" class="ui segment">
       <div class="ui selection list">

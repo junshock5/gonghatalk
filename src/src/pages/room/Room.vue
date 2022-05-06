@@ -1,64 +1,160 @@
 <template>
-    <div>
-        <router-link :to="{ name: 'RoomList' }">
-            <div style="position: absolute; left: 10px; top: 10px;" class="ui green basic button icon">
-                <i class="home icon"></i>
+  <div>
+    <div class="w-100 user-chat">
+      <div class="card">
+        <div class="p-4 border-bottom">
+          <div class="row">
+            <div class="col-md-4 col-9">
+              <h5 class="font-size-15 mb-1">{{ username }}</h5>
+              <p class="text-muted mb-0">
+                <i class="mdi mdi-circle text-success align-middle me-1"></i>
+                    채팅방: {{ $route.query.label }}
+              </p>
             </div>
-        </router-link>
-        <h1 class="header">{{ $route.query.label }}</h1>
+            <div class="col-md-8 col-3">
+              <ul class="list-inline user-chat-nav text-end mb-0">
+                <li class="list-inline-item d-none d-sm-inline-block">
+                  <b-dropdown
+                    menu-class="dropdown-menu-md dropdown-menu-end"
+                    variant="white"
+                    right
+                    toggle-class="nav-btn"
+                  >
+                    <template v-slot:button-content>
+                      <i class="bx bx-search-alt-2"></i>
+                    </template>
+                    <form class="p-3">
+                      <div class="form-group m-0">
+                        <div class="input-group">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Search ..."
+                            aria-label="Recipient's username"
+                          />
+                          <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                              <i class="mdi mdi-magnify"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </b-dropdown>
+                </li>
+                <li class="list-inline-item d-none d-sm-inline-block">
+                  <b-dropdown
+                    toggle-class="nav-btn"
+                    menu-class="dropdown-menu-end"
+                    right
+                    variant="white"
+                  >
+                    <template v-slot:button-content>
+                      <i class="bx bx-cog"></i>
+                    </template>
+                    <b-dropdown-item>View Profile</b-dropdown-item>
+                    <b-dropdown-item>Clear chat</b-dropdown-item>
+                    <b-dropdown-item>Muted</b-dropdown-item>
+                    <b-dropdown-item>Delete</b-dropdown-item>
+                  </b-dropdown>
+                </li>
 
-        <div id="messagelist" v-if="messages.length > 0" class="ui segment">
+                <li class="list-inline-item">
+                  <b-dropdown
+                    toggle-class="nav-btn"
+                    menu-class="dropdown-menu-end"
+                    right
+                    variant="white"
+                  >
+                    <template v-slot:button-content>
+                      <i class="bx bx-dots-horizontal-rounded"></i>
+                    </template>
+                    <b-dropdown-item>Action</b-dropdown-item>
+                    <b-dropdown-item>Another action</b-dropdown-item>
+                    <b-dropdown-item>Something else</b-dropdown-item>
+                  </b-dropdown>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-            <div class="ui mobile divider"></div>
-            <div class="ui divided selection list">
-                <div
-                    v-for="(message, index) in messages"
-                    :key="index"
-                    style="padding: 1em;"
-                    :class="{new: isNew(message)}"
-                    class="item">
-                    <div class="ui stackable grid">
-                        <div class="four wide column">
-                            {{ timeFormat(message.timestamp) }}
-                        </div>
-                        <div class="eight wide column">
-                            <span style="color: #5BBD72;">{{ message.message }}</span>
-                        </div>
-                        <div class="two wide column">
-                            {{ message.handle }}
-                        </div>
+        <div class="chat-users">
+          <div class="chat-conversation p-3">
+            <simplebar
+              style="max-height: 470px"
+              id="containerElement"
+              ref="current"
+            >
+              <ul class="list-unstyled">
+                <li>
+                  <div class="chat-day-title">
+                    <span class="title">Today</span>
+                  </div>
+                </li>
+                <li
+                  v-for="data of messages"
+                  :key="data.message"
+                  :class="{ right: `${data.align}` === 'right' }"
+                >
+                  <div class="conversation-list">
+                    <b-dropdown
+                      variant="white"
+                      menu-class="dropdown-menu-end"
+                    >
+                      <template v-slot:button-content>
+                        <i class="bx bx-dots-vertical-rounded"></i>
+                      </template>
+                      <b-dropdown-item>Copy</b-dropdown-item>
+                      <b-dropdown-item>Save</b-dropdown-item>
+                      <b-dropdown-item>Forward</b-dropdown-item>
+                      <b-dropdown-item>Delete</b-dropdown-item>
+                    </b-dropdown>
+                    <div class="ctext-wrap">
+                      <div class="conversation-name">{{ username }}</div>
+                      <p>{{ data.message }}</p>
+                      <p class="chat-time mb-0">
+                        <i class="bx bx-time-five align-middle me-1"></i>
+                                                  {{ data.time }}
+                      </p>
                     </div>
-                </div>
-                <div class="ui mobile divider"></div>
+                  </div>
+                </li>
+              </ul>
+            </simplebar>
+          </div>
+          <div class="p-3 chat-input-section">
+            <div class="row">
+              <div class="col">
+                <input
+                      type="text"
+                      v-model="newMessage"
+                      class="form-control chat-input"
+                      placeholder="Enter Message..."
+                      :class="{
+                        'is-invalid': submitted && $v.form.message.$error,
+                      }"
+                    />
+              </div>
+              <div class="col-auto">
+                <button
+                  @click="send"
+                  class="btn btn-primary btn-rounded chat-send w-md"
+                >
+                  <span
+                    class="d-none d-sm-inline-block me-2">
+                    <i class="reply icon"></i>
+                    보내기
+                  </span>
+                  <i class="mdi mdi-send"></i>
+                </button>
+              </div>
             </div>
+          </div>
         </div>
-        <div id="inputhandle" class="ui segment">
-            <div class="ui stackable grid">
-                <div class="six wide column nopadding">
-                    <div class="ui fluid right action left icon input">
-                        <i class="user icon"></i>
-                        <input v-model="handle" type="text" placeholder="Your name">
-                        <button @click="randomName" class="ui teal icon button">
-                            <i class="refresh icon"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="eight wide column nopadding">
-                    <div class="ui fluid input">
-                      <input v-model="newMessage" type="text" placeholder="Message...">
-                    </div>
-                </div>
-                <div class="two wide column nopadding">
-                    <button
-                        @click="send"
-                        class="ui fluid teal right labeled right floated icon button">
-                      <i class="reply icon"></i>
-                      Send
-                  </button>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -70,87 +166,91 @@ var STORAGE_KEY = "channels-example";
 var haikunator = new Haikunator();
 
 var Storage = {
-    fetch: function () {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-    },
-    save: function (data) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    }
+  fetch: function () {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  },
+  save: function (data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
 };
 
 
 export default {
-    data () {
-        return {
-            chatsock: null,
-            messages: [],
-            handle: '',
-            newMessage: ""
-        }
+  data() {
+    return {
+      chatsock: null,
+      messages: [],
+      handle: '',
+      newMessage: "",
+      form: {
+        message: '',
+      },
+      username: 'Junshock5',
+    }
+  },
+
+  watch: {
+    handle(name) {
+      Storage.save({name: name})
+    }
+  },
+
+  methods: {
+    send() {
+      var message = {
+        handle: this.handle,
+        message: this.newMessage
+      }
+      this.chatsock.send(JSON.stringify(message));
+      this.newMessage = "";
     },
 
-    watch: {
-        handle (name) {
-            Storage.save({ name: name })
-        }
+    randomName() {
+      var random = haikunator.haikunate({tokenLength: 0});
+
+      this.handle = random.split('-').map(function (n) {
+        return n[0].toUpperCase() + n.substr(1);
+      }).join(' ');
     },
 
-    methods: {
-        send () {
-            var message = {
-                handle: this.handle,
-                message: this.newMessage
-            }
-            this.chatsock.send(JSON.stringify(message));
-            this.newMessage = "";
-        },
+    whoami() {
+      var data = Storage.fetch()
 
-        randomName () {
-            var random = haikunator.haikunate({tokenLength: 0});
-
-            this.handle = random.split('-').map(function (n) {
-                return n[0].toUpperCase()+n.substr(1);
-            }).join(' ');
-        },
-
-        whoami () {
-            var data = Storage.fetch()
-
-            if (data.name) {
-                this.handle = data.name
-            } else {
-                this.randomName()
-            }
-        },
-
-        timeFormat (time) {
-            return moment(moment.utc(time, 'lll')._d).format('lll')
-        },
-
-        isNew (message) {
-            var ms = moment.utc().diff(moment.utc(message.timestamp, 'lll'))
-            if (ms / 1000 < 60) {
-                return true
-            }
-            return false
-        }
+      if (data.name) {
+        this.handle = data.name
+      } else {
+        this.randomName()
+      }
     },
 
-    mounted () {
-        var url = "api/message/?limit=50&label=" + this.$route.query.label
-        this.$http.get(url).then((response) => {
-            this.messages = response.body
-        })
-        // Chat WebSocket
-        var vm = this
-        this.chatsock = new ReconnectingWebsocket(window.wsRoot + '/chat' + '/' + this.$route.query.label);
+    timeFormat(time) {
+      return moment(moment.utc(time, 'lll')._d).format('lll')
+    },
 
-        this.chatsock.onmessage = function(message) {
-            var data = JSON.parse(message.data);
-            vm.messages.push(data);
-        };
+    isNew(message) {
+      var ms = moment.utc().diff(moment.utc(message.timestamp, 'lll'))
+      if (ms / 1000 < 60) {
+        return true
+      }
+      return false
+    }
+  },
 
-        this.whoami()
+  mounted() {
+    var url = "api/message/?limit=50&label=" + this.$route.query.label
+    this.$http.get(url).then((response) => {
+      this.messages = response.body
+    })
+    // Chat WebSocket
+    var vm = this
+    this.chatsock = new ReconnectingWebsocket(window.wsRoot + '/chat' + '/' + this.$route.query.label);
+
+    this.chatsock.onmessage = function (message) {
+      var data = JSON.parse(message.data);
+      vm.messages.push(data);
+    };
+
+    this.whoami()
   }
 }
 </script>
@@ -163,58 +263,58 @@ h1, h2 {
 }
 
 .mobile {
-    visibility: hidden !important;
+  visibility: hidden !important;
 }
 
 .mobile.divider {
-    margin: 0!important;
+  margin: 0 !important;
 }
 
 .new {
-    background-color: rgba(230, 224, 208, 0.29)!important;
+  background-color: rgba(230, 224, 208, 0.29) !important;
 }
 
 @media only screen and (max-width: 767px) {
-    h1, h2 {
-     font-weight: bold;
-     font-size: 2em;
-    }
+  h1, h2 {
+    font-weight: bold;
+    font-size: 2em;
+  }
 
-    #messagelist {
-        border: 0;
-        box-shadow: 0px 0px 0px 0px;
-        padding: 0;
-        margin: -1em;
-        margin-top: 1em;
-    }
+  #messagelist {
+    border: 0;
+    box-shadow: 0px 0px 0px 0px;
+    padding: 0;
+    margin: -1em;
+    margin-top: 1em;
+  }
 
-    #messagelist .list {
-        margin-top: 0;
-    }
+  #messagelist .list {
+    margin-top: 0;
+  }
 
-    .mobile {
-        visibility: visible !important;
-    }
+  .mobile {
+    visibility: visible !important;
+  }
 
-    #inputhandle {
-        border: 0;
-        box-shadow: 0px 0px 0px 0px;
-        padding: 0;
-        margin: -1em;
-        margin-top: 1em;
-        margin-top: 30px;
-    }
+  #inputhandle {
+    border: 0;
+    box-shadow: 0px 0px 0px 0px;
+    padding: 0;
+    margin: -1em;
+    margin-top: 1em;
+    margin-top: 30px;
+  }
 
-    .nopadding {
-        padding: 0!important;
-    }
+  .nopadding {
+    padding: 0 !important;
+  }
 
-    .new {
-        background-color: rgba(230, 224, 208, 0.29)!important;
-    }
+  .new {
+    background-color: rgba(230, 224, 208, 0.29) !important;
+  }
 
-    * {
-        border-radius: 0!important;
-    }
+  * {
+    border-radius: 0 !important;
+  }
 }
 </style>

@@ -1,17 +1,17 @@
 <template>
   <Layout>
-    <PageHeader :title="title" :items="items" />
+    <PageHeader :title="title" :items="items"/>
     <div class="d-lg-flex">
       <div class="chat-leftsidebar me-lg-4">
         <div class>
           <div class="py-4 border-bottom">
             <div class="media">
               <div class="align-self-center me-3">
-<!--                <img-->
-<!--                  src="@/assets/images/users/avatar-1.jpg"-->
-<!--                  class="avatar-xs rounded-circle"-->
-<!--                  alt-->
-<!--                />-->
+                <!--                <img-->
+                <!--                  src="@/assets/images/users/avatar-1.jpg"-->
+                <!--                  class="avatar-xs rounded-circle"-->
+                <!--                  alt-->
+                <!--                />-->
               </div>
               <div class="media-body">
                 <h5 class="font-size-15 mt-0 mb-1">이름</h5>
@@ -40,7 +40,7 @@
 
         <div class="search-box chat-search-box py-4">
           <div class="position-relative">
-            <input type="text" class="form-control" placeholder="검색..." />
+            <input type="text" class="form-control" placeholder="검색..."/>
             <i class="bx bx-search-alt search-icon"></i>
           </div>
         </div>
@@ -50,58 +50,37 @@
             <b-tab title="Tab 1" active>
               <template v-slot:title>
                 <i class="bx bx-chat font-size-20 d-sm-none"></i>
-                <span class="d-none d-sm-block">채팅</span>
+                <span class="d-none d-sm-block">채팅방</span>
               </template>
               <b-card-text>
                 <div>
-                  <h5 class="font-size-14 mb-3">최근 채팅 기록</h5>
                   <simplebar style="max-height: 410px" id="chat-list">
                     <ul class="list-unstyled chat-list">
-                      <li
-                        class
-                        v-for="data of chatData"
-                        :key="data.id"
-                        @click="chatUsername(data.name)"
-                        :class="{ active: username == data.name }"
-                      >
-                        <a href="javascript: void(0);">
-                          <div class="media">
-                            <div class="align-self-center me-3">
-                              <i
-                                :class="`mdi mdi-circle text-${data.color} font-size-10`"
-                              ></i>
-                            </div>
-                            <div
-                              class="align-self-center me-3"
-                              v-if="data.image"
-                            >
-<!--                              <img-->
-<!--                                :src="`${data.image}`"-->
-<!--                                class="rounded-circle avatar-xs"-->
-<!--                                alt-->
-<!--                              />-->
-                            </div>
-                            <div
-                              class="avatar-xs align-self-center me-3"
-                              v-if="!data.image"
-                            >
-                              <span
-                                class="avatar-title rounded-circle bg-soft bg-primary text-primary"
-                                >{{ data.name.charAt(0) }}</span
-                              >
-                            </div>
-                            <div class="media-body overflow-hidden">
-                              <h5 class="text-truncate font-size-14 mb-1">
-                                {{ data.name }}
-                              </h5>
-                              <p class="text-truncate mb-0">
-                                {{ data.message }}
-                              </p>
-                            </div>
-                            <div class="font-size-11">{{ data.time }}</div>
+                      <div class="item" v-for="room in rooms" :key="room.id" style="padding: 0 1em;">
+                        <div class="ui stackable grid">
+                          <div class="two wide column nomobile">
+                            <h3 class="ui header">{{ room.id }}</h3>
                           </div>
-                        </a>
-                      </li>
+                          <div class="ten wide column">
+                            <span class="onlymobile">
+                                <i style="width: 20px; margin-right: 0;" class="black minus icon"></i><i
+                              style="width: 20px;margin-left: -10px;" class="black minus icon"></i>
+                                <router-link :to="{ name: 'room', query: { label: room.label }}">
+                                    <span style="display: inline-block; color: #000;">{{ room.label }}</span>
+                                </router-link>
+                            </span>
+                            <span class="nomobile">
+                                <span style="display: inline-block; color: #000;">{{ room.label }}</span>
+                            </span>
+                          </div>
+                          <div class="four wide column nomobile">
+                            <router-link :to="{ name: 'Room', query: { label: room.label }}">
+                              <h5 style="float: right;" class="ui green header">입장</h5>
+                            </router-link>
+                          </div>
+                        </div>
+                        <div class="ui divider" style="margin-left: -1em; margin-right: -1em;"></div>
+                      </div>
                     </ul>
                   </simplebar>
                 </div>
@@ -110,7 +89,7 @@
             <b-tab>
               <template v-slot:title>
                 <i class="bx bx-group font-size-20 d-sm-none"></i>
-                <span class="d-none d-sm-block">그룹채팅</span>
+                <span class="d-none d-sm-block"  @click="createRoom" >방만들기</span>
               </template>
               <b-card-text>
                 <h5 class="font-size-14 mb-3">Groups</h5>
@@ -121,7 +100,7 @@
                         <div class="avatar-xs me-3">
                           <span
                             class="avatar-title rounded-circle bg-soft bg-primary text-primary"
-                            >G</span
+                          >G</span
                           >
                         </div>
 
@@ -138,7 +117,7 @@
                         <div class="avatar-xs me-3">
                           <span
                             class="avatar-title rounded-circle bg-soft bg-primary text-primary"
-                            >R</span
+                          >R</span
                           >
                         </div>
 
@@ -155,7 +134,7 @@
                         <div class="avatar-xs me-3">
                           <span
                             class="avatar-title rounded-circle bg-soft bg-primary text-primary"
-                            >M</span
+                          >M</span
                           >
                         </div>
 
@@ -172,7 +151,7 @@
                         <div class="avatar-xs me-3">
                           <span
                             class="avatar-title rounded-circle bg-soft bg-primary text-primary"
-                            >A</span
+                          >A</span
                           >
                         </div>
 
@@ -189,7 +168,7 @@
                         <div class="avatar-xs me-3">
                           <span
                             class="avatar-title rounded-circle bg-soft bg-primary text-primary"
-                            >B</span
+                          >B</span
                           >
                         </div>
 
@@ -214,7 +193,7 @@
                     <div class="avatar-xs mb-3">
                       <span
                         class="avatar-title rounded-circle bg-soft bg-primary text-primary"
-                        >A</span
+                      >A</span
                       >
                     </div>
 
@@ -237,7 +216,7 @@
                     <div class="avatar-xs mb-3">
                       <span
                         class="avatar-title rounded-circle bg-soft bg-primary text-primary"
-                        >B</span
+                      >B</span
                       >
                     </div>
 
@@ -254,7 +233,7 @@
                     <div class="avatar-xs mb-3">
                       <span
                         class="avatar-title rounded-circle bg-soft bg-primary text-primary"
-                        >C</span
+                      >C</span
                       >
                     </div>
 
@@ -277,7 +256,7 @@
                     <div class="avatar-xs mb-3">
                       <span
                         class="avatar-title rounded-circle bg-soft bg-primary text-primary"
-                        >D</span
+                      >D</span
                       >
                     </div>
 
@@ -436,7 +415,7 @@
                       class="invalid-feedback"
                     >
                       <span v-if="!$v.form.message.required"
-                        >This value is required.</span
+                      >This value is required.</span
                       >
                     </div>
                     <div class="chat-input-links">
@@ -495,7 +474,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 
 export default {
   name: 'Chat',
@@ -526,6 +505,7 @@ export default {
         message: '',
       },
       username: '관리자',
+      rooms: [],
     };
   },
   computed: {
@@ -562,9 +542,16 @@ export default {
       this.isRegister = true;
       this.$bvModal.show('chat-modal');
     },
+    createRoom() {
+      this.$http.post('api/room/').then((response) => {
+        this.$router.push({name: 'Room', query: {label: response.body["label"]}})
+      })
+    },
   },
   created() {
-    this.getTradeItemFromApi(null);
+    this.$http.get('api/room/').then((response) => {
+      this.rooms = response.body
+    })
   },
 };
 </script>
