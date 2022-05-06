@@ -56,13 +56,13 @@ def ws_receive(message):
         log.debug("ws message isn't json text=%s", text)
         return
     
-    if set(data.keys()) != set(('handle', 'message', 'align')):
+    if set(data.keys()) != set(('handle', 'message', 'writer')):
         log.debug("ws message unexpected format data=%s", data)
         return
 
     if data:
-        log.debug('chat message room=%s handle=%s message=%s, align=%s',
-            room.label, data['handle'], data['message'], data['align'])
+        log.debug('chat message room=%s handle=%s message=%s, writer=%s',
+            room.label, data['handle'], data['message'], data['writer'])
         m = room.messages.create(**data)
 
         # See above for the note about Group

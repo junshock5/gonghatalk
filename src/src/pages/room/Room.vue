@@ -95,7 +95,7 @@
                 <li
                   v-for="data of messages"
                   :key="data.message"
-                  :class="{ right: `${data.align}` === 'right' }"
+                  :class="{ right: `${data.writer}` === `${username}` }"
                 >
                   <div class="conversation-list">
                     <b-dropdown
@@ -113,7 +113,7 @@
                     <div class="ctext-wrap">
                       <div class="conversation-name">{{ username }}</div>
                       <p>{{ data.message }}</p>
-                      <p>{{ data.align }}</p>
+<!--                      <p>{{ data.align }}</p>-->
                       <p class="chat-time mb-0">
                         <i class="bx bx-time-five align-middle me-1"></i>
                                                   {{ data.time }}
@@ -201,7 +201,7 @@ export default {
       var message = {
         handle: this.handle,
         message: this.newMessage,
-        align: 'right'
+        writer: this.username
       }
       this.chatsock.send(JSON.stringify(message));
       this.newMessage = "";

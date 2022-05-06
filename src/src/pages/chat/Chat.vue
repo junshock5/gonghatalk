@@ -274,200 +274,200 @@
           </b-tabs>
         </div>
       </div>
-      <div class="w-100 user-chat">
-        <div class="card">
-          <div class="p-4 border-bottom">
-            <div class="row">
-              <div class="col-md-4 col-9">
-                <h5 class="font-size-15 mb-1">{{ username }}</h5>
-                <p class="text-muted mb-0">
-                  <i class="mdi mdi-circle text-success align-middle me-1"></i>
-                  활성
-                </p>
-              </div>
-              <div class="col-md-8 col-3">
-                <ul class="list-inline user-chat-nav text-end mb-0">
-                  <li class="list-inline-item d-none d-sm-inline-block">
-                    <b-dropdown
-                      menu-class="dropdown-menu-md dropdown-menu-end"
-                      variant="white"
-                      right
-                      toggle-class="nav-btn"
-                    >
-                      <template v-slot:button-content>
-                        <i class="bx bx-search-alt-2"></i>
-                      </template>
-                      <form class="p-3">
-                        <div class="form-group m-0">
-                          <div class="input-group">
-                            <input
-                              type="text"
-                              class="form-control"
-                              placeholder="Search ..."
-                              aria-label="Recipient's username"
-                            />
-                            <div class="input-group-append">
-                              <button class="btn btn-primary" type="submit">
-                                <i class="mdi mdi-magnify"></i>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    </b-dropdown>
-                  </li>
-                  <li class="list-inline-item d-none d-sm-inline-block">
-                    <b-dropdown
-                      toggle-class="nav-btn"
-                      menu-class="dropdown-menu-end"
-                      right
-                      variant="white"
-                    >
-                      <template v-slot:button-content>
-                        <i class="bx bx-cog"></i>
-                      </template>
-                      <b-dropdown-item>View Profile</b-dropdown-item>
-                      <b-dropdown-item>Clear chat</b-dropdown-item>
-                      <b-dropdown-item>Muted</b-dropdown-item>
-                      <b-dropdown-item>Delete</b-dropdown-item>
-                    </b-dropdown>
-                  </li>
+<!--      <div class="w-100 user-chat">-->
+<!--        <div class="card">-->
+<!--          <div class="p-4 border-bottom">-->
+<!--            <div class="row">-->
+<!--              <div class="col-md-4 col-9">-->
+<!--                <h5 class="font-size-15 mb-1">{{ username }}</h5>-->
+<!--                <p class="text-muted mb-0">-->
+<!--                  <i class="mdi mdi-circle text-success align-middle me-1"></i>-->
+<!--                  활성-->
+<!--                </p>-->
+<!--              </div>-->
+<!--              <div class="col-md-8 col-3">-->
+<!--                <ul class="list-inline user-chat-nav text-end mb-0">-->
+<!--                  <li class="list-inline-item d-none d-sm-inline-block">-->
+<!--                    <b-dropdown-->
+<!--                      menu-class="dropdown-menu-md dropdown-menu-end"-->
+<!--                      variant="white"-->
+<!--                      right-->
+<!--                      toggle-class="nav-btn"-->
+<!--                    >-->
+<!--                      <template v-slot:button-content>-->
+<!--                        <i class="bx bx-search-alt-2"></i>-->
+<!--                      </template>-->
+<!--                      <form class="p-3">-->
+<!--                        <div class="form-group m-0">-->
+<!--                          <div class="input-group">-->
+<!--                            <input-->
+<!--                              type="text"-->
+<!--                              class="form-control"-->
+<!--                              placeholder="Search ..."-->
+<!--                              aria-label="Recipient's username"-->
+<!--                            />-->
+<!--                            <div class="input-group-append">-->
+<!--                              <button class="btn btn-primary" type="submit">-->
+<!--                                <i class="mdi mdi-magnify"></i>-->
+<!--                              </button>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </form>-->
+<!--                    </b-dropdown>-->
+<!--                  </li>-->
+<!--                  <li class="list-inline-item d-none d-sm-inline-block">-->
+<!--                    <b-dropdown-->
+<!--                      toggle-class="nav-btn"-->
+<!--                      menu-class="dropdown-menu-end"-->
+<!--                      right-->
+<!--                      variant="white"-->
+<!--                    >-->
+<!--                      <template v-slot:button-content>-->
+<!--                        <i class="bx bx-cog"></i>-->
+<!--                      </template>-->
+<!--                      <b-dropdown-item>View Profile</b-dropdown-item>-->
+<!--                      <b-dropdown-item>Clear chat</b-dropdown-item>-->
+<!--                      <b-dropdown-item>Muted</b-dropdown-item>-->
+<!--                      <b-dropdown-item>Delete</b-dropdown-item>-->
+<!--                    </b-dropdown>-->
+<!--                  </li>-->
 
-                  <li class="list-inline-item">
-                    <b-dropdown
-                      toggle-class="nav-btn"
-                      menu-class="dropdown-menu-end"
-                      right
-                      variant="white"
-                    >
-                      <template v-slot:button-content>
-                        <i class="bx bx-dots-horizontal-rounded"></i>
-                      </template>
-                      <b-dropdown-item>Action</b-dropdown-item>
-                      <b-dropdown-item>Another action</b-dropdown-item>
-                      <b-dropdown-item>Something else</b-dropdown-item>
-                    </b-dropdown>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+<!--                  <li class="list-inline-item">-->
+<!--                    <b-dropdown-->
+<!--                      toggle-class="nav-btn"-->
+<!--                      menu-class="dropdown-menu-end"-->
+<!--                      right-->
+<!--                      variant="white"-->
+<!--                    >-->
+<!--                      <template v-slot:button-content>-->
+<!--                        <i class="bx bx-dots-horizontal-rounded"></i>-->
+<!--                      </template>-->
+<!--                      <b-dropdown-item>Action</b-dropdown-item>-->
+<!--                      <b-dropdown-item>Another action</b-dropdown-item>-->
+<!--                      <b-dropdown-item>Something else</b-dropdown-item>-->
+<!--                    </b-dropdown>-->
+<!--                  </li>-->
+<!--                </ul>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
 
-          <div class="chat-users">
-            <div class="chat-conversation p-3">
-              <simplebar
-                style="max-height: 470px"
-                id="containerElement"
-                ref="current"
-              >
-                <ul class="list-unstyled">
-                  <li>
-                    <div class="chat-day-title">
-                      <span class="title">Today</span>
-                    </div>
-                  </li>
-                  <li
-                    v-for="data of chatMessagesData"
-                    :key="data.message"
-                    :class="{ right: `${data.align}` === 'right' }"
-                  >
-                    <div class="conversation-list">
-                      <b-dropdown
-                        variant="white"
-                        menu-class="dropdown-menu-end"
-                      >
-                        <template v-slot:button-content>
-                          <i class="bx bx-dots-vertical-rounded"></i>
-                        </template>
-                        <b-dropdown-item>Copy</b-dropdown-item>
-                        <b-dropdown-item>Save</b-dropdown-item>
-                        <b-dropdown-item>Forward</b-dropdown-item>
-                        <b-dropdown-item>Delete</b-dropdown-item>
-                      </b-dropdown>
-                      <div class="ctext-wrap">
-                        <div class="conversation-name">{{ data.name }}</div>
-                        <p>{{ data.message }}</p>
-                        <p class="chat-time mb-0">
-                          <i class="bx bx-time-five align-middle me-1"></i>
-                          {{ data.time }}
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </simplebar>
-            </div>
-            <div class="p-3 chat-input-section">
-              <form @submit.prevent="formSubmit" class="row">
-                <div class="col">
-                  <div class="position-relative">
-                    <input
-                      type="text"
-                      v-model="form.message"
-                      class="form-control chat-input"
-                      placeholder="Enter Message..."
-                      :class="{
-                        'is-invalid': submitted && $v.form.message.$error,
-                      }"
-                    />
-                    <div
-                      v-if="submitted && $v.form.message.$error"
-                      class="invalid-feedback"
-                    >
-                      <span v-if="!$v.form.message.required"
-                      >This value is required.</span
-                      >
-                    </div>
-                    <div class="chat-input-links">
-                      <ul class="list-inline mb-0">
-                        <li class="list-inline-item">
-                          <a
-                            href="javascript: void(0);"
-                            v-b-tooltip.hover
-                            placement="top"
-                            title="Emoji"
-                          >
-                            <i class="mdi mdi-emoticon-happy-outline"></i>
-                          </a>
-                        </li>
-                        <li class="list-inline-item">
-                          <a
-                            href="javascript: void(0);"
-                            v-b-tooltip.hover
-                            placement="top"
-                            title="Images"
-                          >
-                            <i class="mdi mdi-file-image-outline"></i>
-                          </a>
-                        </li>
-                        <li class="list-inline-item">
-                          <a
-                            href="javascript: void(0);"
-                            v-b-tooltip.hover
-                            placement="top"
-                            title="Add Files"
-                          >
-                            <i class="mdi mdi-file-document-outline"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-auto">
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-rounded chat-send w-md"
-                  >
-                    <span class="d-none d-sm-inline-block me-2">보내기</span>
-                    <i class="mdi mdi-send"></i>
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+<!--          <div class="chat-users">-->
+<!--            <div class="chat-conversation p-3">-->
+<!--              <simplebar-->
+<!--                style="max-height: 470px"-->
+<!--                id="containerElement"-->
+<!--                ref="current"-->
+<!--              >-->
+<!--                <ul class="list-unstyled">-->
+<!--                  <li>-->
+<!--                    <div class="chat-day-title">-->
+<!--                      <span class="title">Today</span>-->
+<!--                    </div>-->
+<!--                  </li>-->
+<!--                  <li-->
+<!--                    v-for="data of chatMessagesData"-->
+<!--                    :key="data.message"-->
+<!--                    :class="{ right: `${data.align}` === 'right' }"-->
+<!--                  >-->
+<!--                    <div class="conversation-list">-->
+<!--                      <b-dropdown-->
+<!--                        variant="white"-->
+<!--                        menu-class="dropdown-menu-end"-->
+<!--                      >-->
+<!--                        <template v-slot:button-content>-->
+<!--                          <i class="bx bx-dots-vertical-rounded"></i>-->
+<!--                        </template>-->
+<!--                        <b-dropdown-item>Copy</b-dropdown-item>-->
+<!--                        <b-dropdown-item>Save</b-dropdown-item>-->
+<!--                        <b-dropdown-item>Forward</b-dropdown-item>-->
+<!--                        <b-dropdown-item>Delete</b-dropdown-item>-->
+<!--                      </b-dropdown>-->
+<!--                      <div class="ctext-wrap">-->
+<!--                        <div class="conversation-name">{{ data.name }}</div>-->
+<!--                        <p>{{ data.message }}</p>-->
+<!--                        <p class="chat-time mb-0">-->
+<!--                          <i class="bx bx-time-five align-middle me-1"></i>-->
+<!--                          {{ data.time }}-->
+<!--                        </p>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </li>-->
+<!--                </ul>-->
+<!--              </simplebar>-->
+<!--            </div>-->
+<!--            <div class="p-3 chat-input-section">-->
+<!--              <form @submit.prevent="formSubmit" class="row">-->
+<!--                <div class="col">-->
+<!--                  <div class="position-relative">-->
+<!--                    <input-->
+<!--                      type="text"-->
+<!--                      v-model="form.message"-->
+<!--                      class="form-control chat-input"-->
+<!--                      placeholder="Enter Message..."-->
+<!--                      :class="{-->
+<!--                        'is-invalid': submitted && $v.form.message.$error,-->
+<!--                      }"-->
+<!--                    />-->
+<!--                    <div-->
+<!--                      v-if="submitted && $v.form.message.$error"-->
+<!--                      class="invalid-feedback"-->
+<!--                    >-->
+<!--                      <span v-if="!$v.form.message.required"-->
+<!--                      >This value is required.</span-->
+<!--                      >-->
+<!--                    </div>-->
+<!--                    <div class="chat-input-links">-->
+<!--                      <ul class="list-inline mb-0">-->
+<!--                        <li class="list-inline-item">-->
+<!--                          <a-->
+<!--                            href="javascript: void(0);"-->
+<!--                            v-b-tooltip.hover-->
+<!--                            placement="top"-->
+<!--                            title="Emoji"-->
+<!--                          >-->
+<!--                            <i class="mdi mdi-emoticon-happy-outline"></i>-->
+<!--                          </a>-->
+<!--                        </li>-->
+<!--                        <li class="list-inline-item">-->
+<!--                          <a-->
+<!--                            href="javascript: void(0);"-->
+<!--                            v-b-tooltip.hover-->
+<!--                            placement="top"-->
+<!--                            title="Images"-->
+<!--                          >-->
+<!--                            <i class="mdi mdi-file-image-outline"></i>-->
+<!--                          </a>-->
+<!--                        </li>-->
+<!--                        <li class="list-inline-item">-->
+<!--                          <a-->
+<!--                            href="javascript: void(0);"-->
+<!--                            v-b-tooltip.hover-->
+<!--                            placement="top"-->
+<!--                            title="Add Files"-->
+<!--                          >-->
+<!--                            <i class="mdi mdi-file-document-outline"></i>-->
+<!--                          </a>-->
+<!--                        </li>-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="col-auto">-->
+<!--                  <button-->
+<!--                    type="submit"-->
+<!--                    class="btn btn-primary btn-rounded chat-send w-md"-->
+<!--                  >-->
+<!--                    <span class="d-none d-sm-inline-block me-2">보내기</span>-->
+<!--                    <i class="mdi mdi-send"></i>-->
+<!--                  </button>-->
+<!--                </div>-->
+<!--              </form>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
     <!-- end row -->
   </Layout>
