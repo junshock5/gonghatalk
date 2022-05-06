@@ -1,6 +1,6 @@
 [
   {
-    "linkToName": "Chat",
+    "linkToName": "RoomList",
     "menuName": "조회",
     "link": "/chat",
     "icon": "bx bx-chat",
@@ -30,7 +30,7 @@
     ]
   },
   {
-    "linkToName": "RoomList",
+    "linkToName": "Chat",
     "menuName": "조회",
     "link": "/Cabinet",
     "icon": "bx-file-find",

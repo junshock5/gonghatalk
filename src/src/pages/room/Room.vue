@@ -113,10 +113,9 @@
                     <div class="ctext-wrap">
                       <div class="conversation-name">{{ username }}</div>
                       <p>{{ data.message }}</p>
-<!--                      <p>{{ data.align }}</p>-->
                       <p class="chat-time mb-0">
                         <i class="bx bx-time-five align-middle me-1"></i>
-                                                  {{ data.time }}
+                                                  {{ data.timestamp }}
                       </p>
                     </div>
                   </div>
@@ -140,6 +139,7 @@
               <div class="col-auto">
                 <button
                   @click="send"
+                  v-on:keyup.enter="send"
                   class="btn btn-primary btn-rounded chat-send w-md"
                 >
                   <span
