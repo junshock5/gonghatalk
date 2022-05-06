@@ -16,7 +16,7 @@ class Message(models.Model):
     room = models.ForeignKey(Room, related_name='messages')
     handle = models.TextField()
     message = models.TextField()
-    align = models.TextField()
+    align = models.TextField(default='left')
     timestamp = models.DateTimeField(default=timezone.now, db_index=True)
 
     def __unicode__(self):
@@ -27,4 +27,4 @@ class Message(models.Model):
         return self.timestamp.strftime('%m%d%Y,%H:%M:%S')
 
     def as_dict(self):
-        return {'handle': self.handle, 'message': self.message, 'timestamp': self.formatted_timestamp}
+        return {'handle': self.handle, 'message': self.message, 'timestamp': self.formatted_timestamp, 'align': self.align,}

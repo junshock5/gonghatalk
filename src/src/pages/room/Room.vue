@@ -113,6 +113,7 @@
                     <div class="ctext-wrap">
                       <div class="conversation-name">{{ username }}</div>
                       <p>{{ data.message }}</p>
+                      <p>{{ data.align }}</p>
                       <p class="chat-time mb-0">
                         <i class="bx bx-time-five align-middle me-1"></i>
                                                   {{ data.time }}
@@ -199,7 +200,8 @@ export default {
     send() {
       var message = {
         handle: this.handle,
-        message: this.newMessage
+        message: this.newMessage,
+        align: 'right'
       }
       this.chatsock.send(JSON.stringify(message));
       this.newMessage = "";
@@ -248,6 +250,7 @@ export default {
     this.chatsock.onmessage = function (message) {
       var data = JSON.parse(message.data);
       vm.messages.push(data);
+      debugger;
     };
 
     this.whoami()
