@@ -12,8 +12,17 @@ class Room(models.Model):
         return self.label
 
 
+class User(models.Model):
+    name = models.TextField(unique=True)
+    email = models.TextField()
+    passWord = models.TextField()
+
+    def __unicode__(self):
+        return self.name
+
+
 class Message(models.Model):
-    room = models.ForeignKey(Room, related_name='messages')
+    room = models.ForeignKey(Room, models.CASCADE, related_name='messages')
     handle = models.TextField()
     message = models.TextField()
     writer = models.TextField(default='writer')
@@ -27,4 +36,5 @@ class Message(models.Model):
         return self.timestamp.strftime('%m%d%Y,%H:%M:%S')
 
     def as_dict(self):
-        return {'handle': self.handle, 'message': self.message, 'timestamp': self.formatted_timestamp, 'writer': self.writer,}
+        return {'handle': self.handle, 'message': self.message, 'timestamp': self.formatted_timestamp,
+                'writer': self.writer, }

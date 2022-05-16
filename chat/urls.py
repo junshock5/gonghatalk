@@ -16,5 +16,6 @@ urlpatterns = [
     url(r'^$',  views.app, name='app'),
     # url(r'^new/$', views.new_room, name='new_room'),
     url(r'^api/', include(router.urls)),
+    url(r'^api/user', include('chat.user.urls')),
     url(r'^room/(?P<label>[\w-]{,50})/$', views.chat_room, name='chat_room'),
 ]

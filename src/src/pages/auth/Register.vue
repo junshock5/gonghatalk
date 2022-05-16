@@ -41,7 +41,8 @@
               class="mt-3"
               variant="success"
               dismissible
-              >Registration successfull.</b-alert
+            >Registration successfull.
+            </b-alert
             >
 
             <b-alert
@@ -49,88 +50,91 @@
               class="mt-3"
               variant="danger"
               dismissible
-              >{{ regError }}</b-alert
+            >{{ regError }}
+            </b-alert
             >
 
-<!--            <div-->
-<!--              v-if="notification.message"-->
-<!--              :class="'alert ' + notification.type"-->
-<!--            >-->
-<!--              {{ notification.message }}-->
-<!--            </div>-->
+            <!--            <div-->
+            <!--              v-if="notification.message"-->
+            <!--              :class="'alert ' + notification.type"-->
+            <!--            >-->
+            <!--              {{ notification.message }}-->
+            <!--            </div>-->
 
             <b-form class="p-2" @submit.prevent="tryToRegisterIn">
               <b-form-group
-              class="mb-3"
+                class="mb-3"
                 id="email-group"
                 label="Username"
                 label-for="username"
               >
-<!--                <b-form-input-->
-<!--                  id="username"-->
-<!--                  v-model="user.username"-->
-<!--                  type="text"-->
-<!--                  placeholder="Enter username"-->
-<!--                  :class="{-->
-<!--                    'is-invalid': submitted && $v.user.username.$error,-->
-<!--                  }"-->
-<!--                ></b-form-input>-->
-<!--                <div-->
-<!--                  v-if="submitted && !$v.user.username.required"-->
-<!--                  class="invalid-feedback"-->
-<!--                >-->
-<!--                  Username is required.-->
-<!--                </div>-->
+                <!--                <b-form-input-->
+                <!--                  id="username"-->
+                <!--                  v-model="user.username"-->
+                <!--                  type="text"-->
+                <!--                  placeholder="Enter username"-->
+                <!--                  :class="{-->
+                <!--                    'is-invalid': submitted && $v.user.username.$error,-->
+                <!--                  }"-->
+                <!--                ></b-form-input>-->
+                <!--                <div-->
+                <!--                  v-if="submitted && !$v.user.username.required"-->
+                <!--                  class="invalid-feedback"-->
+                <!--                >-->
+                <!--                  Username is required.-->
+                <!--                </div>-->
                 <input type="text" class="form-control" id="userName" v-model="userName">
               </b-form-group>
 
               <b-form-group class="mb-3" id="fullname-group" label="Email" label-for="email">
-<!--                <b-form-input-->
-<!--                  id="email"-->
-<!--                  v-model="user.email"-->
-<!--                  type="email"-->
-<!--                  placeholder="Enter email"-->
-<!--                  :class="{ 'is-invalid': submitted && $v.user.email.$error }"-->
-<!--                ></b-form-input>-->
-<!--                <div-->
-<!--                  v-if="submitted && $v.user.email.$error"-->
-<!--                  class="invalid-feedback"-->
-<!--                >-->
-<!--                  <span v-if="!$v.user.email.required">Email is required.</span>-->
-<!--                  <span v-if="!$v.user.email.email"-->
-<!--                    >Please enter valid email.</span-->
-<!--                  >-->
-<!--                </div>-->
+                <!--                <b-form-input-->
+                <!--                  id="email"-->
+                <!--                  v-model="user.email"-->
+                <!--                  type="email"-->
+                <!--                  placeholder="Enter email"-->
+                <!--                  :class="{ 'is-invalid': submitted && $v.user.email.$error }"-->
+                <!--                ></b-form-input>-->
+                <!--                <div-->
+                <!--                  v-if="submitted && $v.user.email.$error"-->
+                <!--                  class="invalid-feedback"-->
+                <!--                >-->
+                <!--                  <span v-if="!$v.user.email.required">Email is required.</span>-->
+                <!--                  <span v-if="!$v.user.email.email"-->
+                <!--                    >Please enter valid email.</span-->
+                <!--                  >-->
+                <!--                </div>-->
                 <input type="text" class="form-control" id="userEmail" v-model="userEmail">
               </b-form-group>
 
               <b-form-group
-              class="mb-3"
+                class="mb-3"
                 id="password-group"
                 label="Password"
                 label-for="password"
               >
-<!--                <b-form-input-->
-<!--                  id="password"-->
-<!--                  v-model="user.password"-->
-<!--                  type="password"-->
-<!--                  placeholder="Enter password"-->
-<!--                  :class="{-->
-<!--                    'is-invalid': submitted && $v.user.password.$error,-->
-<!--                  }"-->
-<!--                ></b-form-input>-->
-<!--                <div-->
-<!--                  v-if="submitted && !$v.user.password.required"-->
-<!--                  class="invalid-feedback"-->
-<!--                >-->
-<!--                  Password is required.-->
-<!--                </div>-->
+                <!--                <b-form-input-->
+                <!--                  id="password"-->
+                <!--                  v-model="user.password"-->
+                <!--                  type="password"-->
+                <!--                  placeholder="Enter password"-->
+                <!--                  :class="{-->
+                <!--                    'is-invalid': submitted && $v.user.password.$error,-->
+                <!--                  }"-->
+                <!--                ></b-form-input>-->
+                <!--                <div-->
+                <!--                  v-if="submitted && !$v.user.password.required"-->
+                <!--                  class="invalid-feedback"-->
+                <!--                >-->
+                <!--                  Password is required.-->
+                <!--                </div>-->
                 <input type="text" class="form-control" id="userPassword" v-model="userPassword">
               </b-form-group>
 
               <div class="mt-4 d-grid">
-                <b-button type="submit" variant="primary" class="btn-block"
-                  >Register</b-button
+                <b-button variant="primary" class="btn-block"
+                          @click="send"
+                >Register
+                </b-button
                 >
               </div>
 
@@ -169,7 +173,7 @@
                 <p class="mb-0">
                   By registering you agree to the Gonghatalk
                   <a href="javascript: void(0);" class="text-primary"
-                    >Terms of Use</a
+                  >Terms of Use</a
                   >
                 </p>
               </div>
@@ -186,7 +190,8 @@
               tag="a"
               to="/login"
               class="fw-medium text-primary"
-              >Login</router-link
+            >Login
+            </router-link
             >
           </p>
           <p>
@@ -204,6 +209,7 @@
 <script>
 // eslint-disable-next-line import/extensions
 import Layout from './auth';
+import ApiHelper from "../../utils/apiHelper";
 
 export default {
   name: 'Register',
@@ -217,6 +223,16 @@ export default {
       userPassword: '',
     };
   },
+  methods: {
+    send() {
+      const message = {
+        name: this.userName,
+        email: this.userEmail,
+        passWord: this.userPassword,
+      }
+      ApiHelper.UserApi.register(message);
+    },
+  }
 };
 </script>
 
