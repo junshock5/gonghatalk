@@ -1,12 +1,16 @@
-from django.core.serializers import json
-from django.views.decorators.csrf import csrf_exempt
-from requests import Response
-from rest_framework.decorators import api_view
+import json
 
-from chat.consumers import log
-from chat.models import User
+import haikunator
+from channels.sessions import channel_session
+from django.db import transaction
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from chat.models import Room, User
+from chat.serializers import UserSerializer
 from chat.utils.ApiWrapper import UserAPI
-from chat.utils.model.UriResource import HttpResponse
 
 
 @csrf_exempt
@@ -16,14 +20,13 @@ def user(request):
     if request.method == 'GET':
         return UserAPI().User.download(request)
     if request.method == 'POST':
-        # try:
-        user = User.objects.create(name=request.data['name'],
-                                   email=request.data['email'],
-                                   passWord=request.data['passWord'])
-        # except Exception as e:
-        #     log.debug('user=%s', e)
-        return HttpResponse(request.data, user)
-        # return UserAPI().User.register(request, json.loads(request.body))
+        new_user = None
+        if 'body' in json.loads(request.body):
+            serializer = UserSerializer(data=json.loads(request.body)['body'])
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response({"user": new_user}, status=status.HTTP_200_OK)
     if request.method == 'DELETE':
         return UserAPI().User.delete(request)
     if request.method == 'PUT':
