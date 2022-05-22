@@ -1,9 +1,16 @@
 import instance from './axios/axiosInstance';
+import functions from "../../functions";
 
 const User = {
   async register(body, params = null) {
-    // eslint-disable-next-line no-return-await
-    return await instance.post('/api/user/register', {body} );
+    try {
+      const response = await instance.post('/api/user/register', {body});
+      return functions.HttpHelper.convertResult(response);
+    } catch (e) {
+      return functions.HttpHelper.convertError(e);
+    }
+
+
   },
 };
 

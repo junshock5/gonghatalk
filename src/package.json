@@ -97,7 +97,8 @@
     "@fullcalendar/list": "^5.0.1",
     "@fullcalendar/timegrid": "^5.0.1",
     "@fullcalendar/vue": "^5.0.1",
-    "vue-form-wizard": "^0.8.4"
+    "vue-form-wizard": "^0.8.4",
+    "sweetalert2": "^11.1.10"
   },
   "engines": {
     "node": ">= 4.0.0",

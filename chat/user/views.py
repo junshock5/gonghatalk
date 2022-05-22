@@ -1,14 +1,10 @@
 import json
 
-import haikunator
-from channels.sessions import channel_session
-from django.db import transaction
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from chat.models import Room, User
 from chat.serializers import UserSerializer
 from chat.utils.ApiWrapper import UserAPI
 

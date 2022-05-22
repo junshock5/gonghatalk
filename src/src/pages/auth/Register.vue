@@ -210,6 +210,7 @@
 // eslint-disable-next-line import/extensions
 import Layout from './auth';
 import ApiHelper from "../../utils/apiHelper";
+import SwalHelper from "../../functions/swalHelper";
 
 export default {
   name: 'Register',
@@ -224,13 +225,22 @@ export default {
     };
   },
   methods: {
-    send() {
+    async send() {
       const message = {
         name: this.userName,
         email: this.userEmail,
         passWord: this.userPassword,
       }
-      ApiHelper.UserApi.register(message);
+      const response = await ApiHelper.UserApi.register(message);
+      console.log(response);
+      if (response.status == 201) {
+        await SwalHelper.httpResponseAlert(response, '회원가입', {
+          successMessage: '완료되었습니다.',
+        });
+        this.$router.push({name: 'Login'});
+      } else {
+        await SwalHelper.error('입력 항목을 다시 확인해주세요', '');
+      }
     },
   }
 };
