@@ -250,7 +250,6 @@ export default {
     this.chatsock.onmessage = function (message) {
       var data = JSON.parse(message.data);
       vm.messages.push(data);
-      debugger;
     };
 
     this.whoami()

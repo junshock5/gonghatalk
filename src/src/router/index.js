@@ -11,6 +11,8 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
+  const toRoute = to.name;
+  if (toRoute === 'chat' || (from.name === null && toRoute !== 'Login')) return next();
   if (to.matched.some((route) => route.meta.requireAdminAuth)) {
     next();
     // if (!store.getters.isAdmin) {

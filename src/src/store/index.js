@@ -128,9 +128,8 @@ export default new Vuex.Store({
       const result = await axios.get('/api/cabinet/simple_cabinet_items', { params });
       context.commit('getCabinetItemsFromApi', result.data);
     },
-    async getUserData(context, params) {
-      const result = await ApiHelper.SsoApi.checkUserData(params);
-      context.commit('setUserData', result.data);
+    async setUserData(context, params) {
+      context.commit('setUserData', params);
     },
   },
   modules: {},

@@ -13,9 +13,9 @@
               </div>
               <div class="col-5 align-self-end">
                 <img
-                    src="@/assets/images/profile-img.png"
-                    alt
-                    class="img-fluid"
+                  src="@/assets/images/profile-img.png"
+                  alt
+                  class="img-fluid"
                 />
               </div>
             </div>
@@ -31,37 +31,37 @@
               </router-link>
             </div>
             <b-alert
-                v-model="isAuthError"
-                variant="danger"
-                class="mt-3"
-                dismissible
+              v-model="isAuthError"
+              variant="danger"
+              class="mt-3"
+              dismissible
             >{{ authError }}
             </b-alert
             >
             <b-form class="p-2" @submit.prevent="tryToLogIn">
               <b-form-group
-                  class="mb-3"
-                  id="input-group-1"
-                  label="Email"
-                  label-for="input-1"
+                class="mb-3"
+                id="input-group-1"
+                label="Email"
+                label-for="input-1"
               >
                 <input type="text" class="form-control" id="userName" v-model="userEmail">
               </b-form-group>
 
               <b-form-group
-                  class="mb-3"
-                  id="input-group-2"
-                  label="Password"
-                  label-for="input-2"
+                class="mb-3"
+                id="input-group-2"
+                label="Password"
+                label-for="input-2"
               >
                 <input type="text" class="form-control" id="userPassword" v-model="userPassword">
               </b-form-group>
               <b-form-checkbox
-                  class="form-check"
-                  id="customControlInline"
-                  name="checkbox-1"
-                  value="accepted"
-                  unchecked-value="not_accepted"
+                class="form-check"
+                id="customControlInline"
+                name="checkbox-1"
+                value="accepted"
+                unchecked-value="not_accepted"
               >
                 Remember me
               </b-form-checkbox>
@@ -78,24 +78,24 @@
                 <ul class="list-inline">
                   <li class="list-inline-item">
                     <a
-                        href="javascript: void(0);"
-                        class="social-list-item bg-primary text-white border-primary"
+                      href="javascript: void(0);"
+                      class="social-list-item bg-primary text-white border-primary"
                     >
                       <i class="mdi mdi-facebook"></i>
                     </a>
                   </li>
                   <li class="list-inline-item">
                     <a
-                        href="javascript: void(0);"
-                        class="social-list-item bg-info text-white border-info"
+                      href="javascript: void(0);"
+                      class="social-list-item bg-info text-white border-info"
                     >
                       <i class="mdi mdi-twitter"></i>
                     </a>
                   </li>
                   <li class="list-inline-item">
                     <a
-                        href="javascript: void(0);"
-                        class="social-list-item bg-danger text-white border-danger"
+                      href="javascript: void(0);"
+                      class="social-list-item bg-danger text-white border-danger"
                     >
                       <i class="mdi mdi-google"></i>
                     </a>
@@ -117,9 +117,9 @@
           <p>
             Don't have an account ?
             <router-link
-                tag="a"
-                to="/register"
-                class="fw-medium text-primary"
+              tag="a"
+              to="/register"
+              class="fw-medium text-primary"
             >Signup now
             </router-link
             >
@@ -142,6 +142,8 @@
 import Layout from './auth';
 import ApiHelper from "../../utils/apiHelper";
 import SwalHelper from "../../functions/swalHelper";
+import CookieHelper from "../../functions/cookieHelper";
+import {mapActions} from "vuex";
 
 export default {
   name: 'Login',
@@ -155,6 +157,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions([
+      'setUserData',
+    ]),
     async send() {
       const message = {
         email: this.userEmail,
@@ -166,7 +171,11 @@ export default {
         await SwalHelper.httpResponseAlert(response, '로그인', {
           successMessage: '완료되었습니다.',
         });
-        this.$router.push({name: 'roomList'});
+        debugger;
+        CookieHelper.setCookie('email', response.data.email, 30);
+        CookieHelper.setCookie('userName', response.data.name, 30);
+        await this.setUserData(response.data);
+        this.$router.push({name: 'RoomList'});
       } else {
         await SwalHelper.error('입력 항목을 다시 확인해주세요', '');
       }
