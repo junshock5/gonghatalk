@@ -9,8 +9,14 @@ const User = {
     } catch (e) {
       return functions.HttpHelper.convertError(e);
     }
-
-
+  },
+  async login(body, params = null) {
+    try {
+      const response = await instance.post('/api/user/login', {body});
+      return functions.HttpHelper.convertResult(response);
+    } catch (e) {
+      return functions.HttpHelper.convertError(e);
+    }
   },
 };
 

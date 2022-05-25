@@ -38,14 +38,6 @@
             >{{ authError }}
             </b-alert
             >
-
-<!--            <div-->
-<!--                v-if="notification.message"-->
-<!--                :class="'alert ' + notification.type"-->
-<!--            >-->
-<!--              {{ notification.message }}-->
-<!--            </div>-->
-
             <b-form class="p-2" @submit.prevent="tryToLogIn">
               <b-form-group
                   class="mb-3"
@@ -53,20 +45,7 @@
                   label="Email"
                   label-for="input-1"
               >
-                <b-form-input
-                    id="input-1"
-                    v-model="email"
-                    type="text"
-                    placeholder="Enter email"
-                    :class="{ 'is-invalid': submitted && $v.email.$error }"
-                ></b-form-input>
-                <div
-                    v-if="submitted && $v.email.$error"
-                    class="invalid-feedback"
-                >
-                  <span v-if="!$v.email.required">Email is required.</span>
-                  <span v-if="!$v.email.email">Please enter valid email.</span>
-                </div>
+                <input type="text" class="form-control" id="userName" v-model="userEmail">
               </b-form-group>
 
               <b-form-group
@@ -75,19 +54,7 @@
                   label="Password"
                   label-for="input-2"
               >
-                <b-form-input
-                    id="input-2"
-                    v-model="password"
-                    type="password"
-                    placeholder="Enter password"
-                    :class="{ 'is-invalid': submitted && $v.password.$error }"
-                ></b-form-input>
-                <div
-                    v-if="submitted && !$v.password.required"
-                    class="invalid-feedback"
-                >
-                  Password is required.
-                </div>
+                <input type="text" class="form-control" id="userPassword" v-model="userPassword">
               </b-form-group>
               <b-form-checkbox
                   class="form-check"
@@ -99,7 +66,8 @@
                 Remember me
               </b-form-checkbox>
               <div class="mt-3 d-grid">
-                <b-button type="submit" variant="primary" class="btn-block"
+                <b-button variant="primary" class="btn-block"
+                          @click="send"
                 >Log In
                 </b-button
                 >
@@ -172,12 +140,38 @@
 <script>
 // eslint-disable-next-line import/extensions
 import Layout from './auth';
+import ApiHelper from "../../utils/apiHelper";
+import SwalHelper from "../../functions/swalHelper";
 
 export default {
   name: 'Login',
   components: {
     Layout,
   },
+  data() {
+    return {
+      userEmail: '',
+      userPassword: '',
+    };
+  },
+  methods: {
+    async send() {
+      const message = {
+        email: this.userEmail,
+        passWord: this.userPassword,
+      }
+      const response = await ApiHelper.UserApi.login(message);
+      console.log(response);
+      if (response.status == 200) {
+        await SwalHelper.httpResponseAlert(response, '로그인', {
+          successMessage: '완료되었습니다.',
+        });
+        this.$router.push({name: 'roomList'});
+      } else {
+        await SwalHelper.error('입력 항목을 다시 확인해주세요', '');
+      }
+    },
+  }
 };
 </script>
 

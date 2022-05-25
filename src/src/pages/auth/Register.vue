@@ -68,41 +68,10 @@
                 label="Username"
                 label-for="username"
               >
-                <!--                <b-form-input-->
-                <!--                  id="username"-->
-                <!--                  v-model="user.username"-->
-                <!--                  type="text"-->
-                <!--                  placeholder="Enter username"-->
-                <!--                  :class="{-->
-                <!--                    'is-invalid': submitted && $v.user.username.$error,-->
-                <!--                  }"-->
-                <!--                ></b-form-input>-->
-                <!--                <div-->
-                <!--                  v-if="submitted && !$v.user.username.required"-->
-                <!--                  class="invalid-feedback"-->
-                <!--                >-->
-                <!--                  Username is required.-->
-                <!--                </div>-->
                 <input type="text" class="form-control" id="userName" v-model="userName">
               </b-form-group>
 
               <b-form-group class="mb-3" id="fullname-group" label="Email" label-for="email">
-                <!--                <b-form-input-->
-                <!--                  id="email"-->
-                <!--                  v-model="user.email"-->
-                <!--                  type="email"-->
-                <!--                  placeholder="Enter email"-->
-                <!--                  :class="{ 'is-invalid': submitted && $v.user.email.$error }"-->
-                <!--                ></b-form-input>-->
-                <!--                <div-->
-                <!--                  v-if="submitted && $v.user.email.$error"-->
-                <!--                  class="invalid-feedback"-->
-                <!--                >-->
-                <!--                  <span v-if="!$v.user.email.required">Email is required.</span>-->
-                <!--                  <span v-if="!$v.user.email.email"-->
-                <!--                    >Please enter valid email.</span-->
-                <!--                  >-->
-                <!--                </div>-->
                 <input type="text" class="form-control" id="userEmail" v-model="userEmail">
               </b-form-group>
 
@@ -112,21 +81,6 @@
                 label="Password"
                 label-for="password"
               >
-                <!--                <b-form-input-->
-                <!--                  id="password"-->
-                <!--                  v-model="user.password"-->
-                <!--                  type="password"-->
-                <!--                  placeholder="Enter password"-->
-                <!--                  :class="{-->
-                <!--                    'is-invalid': submitted && $v.user.password.$error,-->
-                <!--                  }"-->
-                <!--                ></b-form-input>-->
-                <!--                <div-->
-                <!--                  v-if="submitted && !$v.user.password.required"-->
-                <!--                  class="invalid-feedback"-->
-                <!--                >-->
-                <!--                  Password is required.-->
-                <!--                </div>-->
                 <input type="text" class="form-control" id="userPassword" v-model="userPassword">
               </b-form-group>
 
@@ -233,7 +187,7 @@ export default {
       }
       const response = await ApiHelper.UserApi.register(message);
       console.log(response);
-      if (response.status == 201) {
+      if (response.status == 200) {
         await SwalHelper.httpResponseAlert(response, '회원가입', {
           successMessage: '완료되었습니다.',
         });
