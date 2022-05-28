@@ -353,6 +353,7 @@ export default {
 
   methods: {
     createRoom() {
+      // TODO: 유저정보 추가
       this.$http.post('api/room/').then((response) => {
         this.$router.push({name: 'Room', query: {label: response.body["label"]}})
       })

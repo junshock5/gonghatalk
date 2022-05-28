@@ -7,11 +7,9 @@
           <router-link :to="{name: 'Dashboard'}" class="logo logo-light">
             <span class="logo-sm" style="color: white">
               Talk
-              <!--              <sup>{{ environment }}</sup>-->
             </span>
             <span class="logo-lg">
               공하톡  <i class="mdi mdi-chat"></i>
-              <!--              <sup>{{ environment }}</sup>-->
             </span>
           </router-link>
         </div>
@@ -26,20 +24,6 @@
         </button>
         <!-- Mega Dropdown -->
         <div class="service-selector header-item">
-          <!--          <multi-select-->
-          <!--              ref="multiSelect"-->
-          <!--              v-model="selectedService"-->
-          <!--              placeholder="항목명을 입력해주세요"-->
-          <!--              :options="userServices"-->
-          <!--              :show-labels="false"-->
-          <!--              :allow-empty="false"-->
-          <!--              :close-on-select="true"-->
-          <!--              :clear-on-select="false"-->
-          <!--              :searchable="false"-->
-          <!--              track-by="serviceName"-->
-          <!--              label="serviceName"-->
-          <!--              class="helo"-->
-          <!--          />-->
         </div>
       </div>
 
@@ -52,7 +36,7 @@
           <!--              alt="Header Avatar"-->
           <!--          />-->
           <button class="btn header-item noti-icon default-cursor">
-            <template v-if="this.userData!={}">
+            <template v-if="this.userData!=null">
               <b>{{ this.userData.name }}</b> | <b>{{ this.userData.email }}</b>
             </template>
           </button>
@@ -77,6 +61,7 @@ import {mapActions, mapGetters} from 'vuex';
 import ApiHelper from '@/utils/apiHelper';
 import CookieHelper from "../../functions/cookieHelper";
 import SwalHelper from "../../functions/swalHelper";
+import functions from "../../functions";
 
 export default {
   name: 'Header',
@@ -124,15 +109,17 @@ export default {
       if (this.userData === null || this.userData === {})
         this.$router.push({name: 'Login'})
       else {
-        await SwalHelper.httpResponseAlert(this.userData, '로그아웃', {
-          successMessage: '완료되었습니다.',
-        });
-        this.userData = {};
+        const result = await functions.SwalHelper.confirm('로그아웃 하시겠습니까?');
+        if (result.isConfirmed) {
+          await this.setUserData(null);
+          this.$router.push({name: 'Login'});
+        }
       }
     },
     ...mapActions([
       'signIn',
       'signOut',
+      'setUserData',
     ]),
     toggleMenu() {
       this.$parent.toggleMenu();
