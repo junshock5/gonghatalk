@@ -105,6 +105,15 @@ class SwalHelper {
           confirmButton: 'btn btn-primary',
         },
       });
+    } else if (response.creating) {
+      await SwAlert.fire({
+        title: options.successMessage || `${actionTitle} 되었습니다.`,
+        icon: 'success',
+        showCancelButton: false,
+        customClass: {
+          confirmButton: 'btn btn-primary',
+        },
+      });
     } else if (response.ongoing) {
       await SwAlert.fire({
         title: options.ongoingMessage || `${actionTitle}을/를 수행중입니다.`,

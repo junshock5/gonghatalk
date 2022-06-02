@@ -38,10 +38,10 @@ def user_login(request):
     assert request is not None
     if request.method == 'POST':
         request_user = json.loads(request.body)['body']
-        # 로그인 유저의 email이 있는지 찾아본다
+        # 로그인 유저의 email 이 있는지 찾아 본다
         if User.objects.filter(email=request_user['email']).exists():
             user_obj = User.objects.get(email=request_user['email'])
-        # 있다면 password 정보가 맞는지 확인한다
+        # 있다면 password 정보가 맞는지 확인 한다
         if user_obj is not None:
             if user_obj.passWord == request_user['passWord']:
                 user_obj = UserSerializer(user_obj).data

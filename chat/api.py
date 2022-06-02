@@ -1,4 +1,5 @@
-import haikunator
+import json
+
 from rest_framework import filters
 from rest_framework import viewsets
 from rest_framework import mixins
@@ -11,24 +12,18 @@ from chat.serializers import RoomSerializer
 from chat.serializers import MessageSerializer
 
 
-class RoomViewSet(mixins.CreateModelMixin, 
+class RoomViewSet(mixins.CreateModelMixin,
                   mixins.ListModelMixin,
                   viewsets.GenericViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
 
     def create(self, request, *args, **kwargs):
-        new_room = None
-        while not new_room:
-            with transaction.atomic():
-                label = haikunator.haikunate()
-                if Room.objects.filter(label=label).exists():
-                    continue
-                new_room = Room.objects.create(label=label)
-
-        serializer = self.get_serializer(new_room)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        if 'body' in json.loads(request.body):
+            serializer = RoomSerializer(data=json.loads(request.body)['body'])
+            if serializer.is_valid():
+                serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class MessageViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):

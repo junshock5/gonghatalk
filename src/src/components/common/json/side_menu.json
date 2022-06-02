@@ -14,17 +14,17 @@
     "label": "설정",
     "children": [
       {
-        "linkToName": "Login",
+        "linkToName": "Profile",
         "menuName": "카테고리",
         "parent": "Setting",
-        "link": "/setting/Login",
+        "link": "/profile/Profile",
         "label": "프로필"
       },
       {
-        "linkToName": "Category",
+        "linkToName": "Account",
         "menuName": "템플릿",
         "parent": "Setting",
-        "link": "/setting/Category",
+        "link": "/profile/Account",
         "label": "계정"
       }
     ]

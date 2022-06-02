@@ -1,9 +1,7 @@
-import SasApi from './sas';
-import SsoApi from './sso';
 import UserApi from './user';
+import RoomApi from './room';
 
 export default {
-  SsoApi,
-  SasApi,
   UserApi,
+  RoomApi,
 };

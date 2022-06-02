@@ -54,7 +54,7 @@
                 label="Password"
                 label-for="input-2"
               >
-                <input type="text" class="form-control" id="userPassword" v-model="userPassword">
+                <input type="password" class="form-control" id="key" v-model="userPassword">
               </b-form-group>
               <b-form-checkbox
                 class="form-check"
@@ -166,14 +166,13 @@ export default {
         passWord: this.userPassword,
       }
       const response = await ApiHelper.UserApi.login(message);
-      console.log(response);
-      if (response.status == 200) {
+      if (response.status == 200 && response !== undefined && response.data !== null) {
         await SwalHelper.httpResponseAlert(response, '로그인', {
           successMessage: '완료되었습니다.',
         });
-        debugger;
+        console.log('로그인이 완료되었습니다.');
         CookieHelper.setCookie('email', response.data.email, 30);
-        CookieHelper.setCookie('userName', response.data.name, 30);
+        // CookieHelper.setCookie('userName', response.data.name, 30);
         await this.setUserData(response.data);
         this.$router.push({name: 'RoomList'});
       } else {

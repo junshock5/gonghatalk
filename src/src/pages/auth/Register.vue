@@ -71,7 +71,10 @@
                 <input type="text" class="form-control" id="userName" v-model="userName">
               </b-form-group>
 
-              <b-form-group class="mb-3" id="fullname-group" label="Email" label-for="email">
+              <b-form-group class="mb-3"
+                            id="fullname-group"
+                            label="Email"
+                            label-for="email">
                 <input type="text" class="form-control" id="userEmail" v-model="userEmail">
               </b-form-group>
 
@@ -81,7 +84,16 @@
                 label="Password"
                 label-for="password"
               >
-                <input type="text" class="form-control" id="userPassword" v-model="userPassword">
+                <input type="password" class=form-control id="key" v-model="userPassword">
+              </b-form-group>
+
+              <b-form-group
+                class="mb-3"
+                id="password-group"
+                label="Password Confirm"
+                label-for="password"
+              >
+                <input type="password" class="form-control" id="key2" v-model="userPassword2">
               </b-form-group>
 
               <div class="mt-4 d-grid">
@@ -176,17 +188,27 @@ export default {
       userName: '',
       userEmail: '',
       userPassword: '',
+      userPassword2: '',
     };
   },
   methods: {
+    async checkSamePassword() {
+      if (this.userPassword == this.userPassword2) {
+        return true;
+      } else {
+        await SwalHelper.error('패스워드를 다시 확인해주세요', '');
+        return false;
+      }
+    },
     async send() {
+      if (!await this.checkSamePassword())
+        return;
       const message = {
         name: this.userName,
         email: this.userEmail,
         passWord: this.userPassword,
       }
       const response = await ApiHelper.UserApi.register(message);
-      console.log(response);
       if (response.status == 200) {
         await SwalHelper.httpResponseAlert(response, '회원가입', {
           successMessage: '완료되었습니다.',

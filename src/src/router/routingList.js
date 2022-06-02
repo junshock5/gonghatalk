@@ -34,6 +34,16 @@ const routing = [
         name: 'RoomList',
         component: resolve => require(['@/pages/room/RoomList'], resolve)
       },
+      {
+        path: '/profile',
+        name: 'Profile',
+        component: resolve => require(['@/pages/profile/Profile'], resolve)
+      },
+      {
+        path: '/account',
+        name: 'Account',
+        component: resolve => require(['@/pages/profile/Account'], resolve)
+      },
     ],
   },
   {

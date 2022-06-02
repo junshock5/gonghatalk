@@ -3,17 +3,19 @@ import string
 from django.db import transaction
 from django.shortcuts import render, redirect
 import haikunator
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import Room
 
-
+@csrf_exempt
 def app(request):
     return render(request, "index.html")
 
-
+@csrf_exempt
 def about(request):
     return render(request, "chat/about.html")
 
-
+@csrf_exempt
 def new_room(request):
     """
     Randomly create a new room, and redirect to it.

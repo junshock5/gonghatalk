@@ -8,8 +8,9 @@
             <span class="logo-sm" style="color: white">
               Talk
             </span>
-            <span class="logo-lg">
-              공하톡  <i class="mdi mdi-chat"></i>
+            <span class="logo-lg" style="vertical-align: middle">
+              공하톡
+              <img src="/static/favicon.ico" alt="">
             </span>
           </router-link>
         </div>
@@ -111,7 +112,9 @@ export default {
       else {
         const result = await functions.SwalHelper.confirm('로그아웃 하시겠습니까?');
         if (result.isConfirmed) {
-          await this.setUserData(null);
+          await this.setUserData({});
+          CookieHelper.deleteCookie('userName');
+          CookieHelper.deleteCookie('email');
           this.$router.push({name: 'Login'});
         }
       }

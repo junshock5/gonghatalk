@@ -29,7 +29,7 @@ const Sso = {
     // eslint-disable-next-line consistent-return
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4 && xhr.status === 200) {
-        console.log('SSO 로그아웃 완료');
+        // console.log('SSO 로그아웃 완료');
         // eslint-disable-next-line no-undef
         window.location.assign(`${SSO_URL}/api/auth/authorize?response_type=code&client_id=${SSO_CLIENT_ID}`);
       }

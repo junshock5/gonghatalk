@@ -7,7 +7,9 @@ from django.utils.timezone import now
 
 class Room(models.Model):
     name = models.TextField()
-    label = models.SlugField(unique=True)
+    label = models.TextField(unique=True)
+    userEmail = models.TextField()
+    timestamp = models.DateTimeField(default=now, db_index=True)
 
     def __unicode__(self):
         return self.label
@@ -15,8 +17,9 @@ class Room(models.Model):
 
 class User(models.Model):
     name = models.TextField(unique=True)
-    email = models.TextField()
+    email = models.TextField(unique=True)
     passWord = models.TextField()
+    timestamp = models.DateTimeField(default=now, db_index=True)
 
     def __unicode__(self):
         return self.name

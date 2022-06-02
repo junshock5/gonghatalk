@@ -4,9 +4,10 @@ from chat.models import Message
 
 
 class RoomSerializer(serializers.ModelSerializer):
+    timestamp = serializers.CharField(source="formatted_timestamp", read_only=True)
     class Meta:
         model = Room
-        fields = ['id', 'name', 'label']
+        fields = ['label', 'userEmail', 'timestamp']
 
 
 class MessageSerializer(serializers.ModelSerializer):
@@ -18,6 +19,7 @@ class MessageSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    timestamp = serializers.CharField(source="formatted_timestamp", read_only=True)
     class Meta:
         model = User
-        fields = ['name', 'email', 'passWord']
+        fields = ['name', 'email', 'passWord', 'timestamp']

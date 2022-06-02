@@ -35,6 +35,7 @@ class HttpHelper {
     return {
       status: response.status,
       success: response.status === 200,
+      creating: response.status === 201,
       ongoing: response.status === 202,
       isRetry: response.status === 410, // GONE => 만료됐으니 다시 시도해
       unAuth: response.status === 401, // 인증이 안되면 401 줌, (현재는 이 케이스가 없음)
