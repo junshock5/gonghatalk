@@ -1066,7 +1066,7 @@ $pagination-hover-bg:               $gray-200;
 $pagination-hover-border-color:     $gray-400;
 
 $pagination-active-color:           $component-active-color;
-$pagination-active-bg:              #5F0080;
+$pagination-active-bg: #8aa8d7;
 $pagination-active-border-color:    $pagination-active-bg;
 
 $pagination-disabled-color:         $gray-400;
@@ -1115,7 +1115,7 @@ $accordion-button-color:                  $accordion-color;
 $accordion-button-bg:                     $accordion-bg;
 $accordion-transition:                    $btn-transition, border-radius .15s ease;
 $accordion-button-active-bg:              tint-color($component-active-bg, 90%);
-$accordion-button-active-color:           #5F0080;
+$accordion-button-active-color: #154ca1;
 
 $accordion-button-focus-border-color:     $input-focus-border-color;
 $accordion-button-focus-box-shadow:       none;
@@ -1278,7 +1278,7 @@ $progress-bg:                       $gray-300;
 $progress-border-radius:            $border-radius;
 $progress-box-shadow:               $box-shadow-inset;
 $progress-bar-color:                $white;
-$progress-bar-bg:                   #5F0080;
+$progress-bar-bg: #154ca1;
 $progress-bar-animation-timing:     1s linear infinite;
 $progress-bar-transition:           width .6s ease;
 

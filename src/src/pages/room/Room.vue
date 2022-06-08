@@ -5,10 +5,10 @@
         <div class="p-4 border-bottom">
           <div class="row">
             <div class="col-md-4 col-9">
-              <h5 class="font-size-15 mb-1">{{ username }}</h5>
+<!--              <h5 class="font-size-15 mb-1">{{ username }}</h5>-->
               <p class="text-muted mb-0">
                 <i class="mdi mdi-circle text-success align-middle me-1"></i>
-                    채팅방: {{ $route.query.label }}
+                채팅방명: {{ $route.query.label }}
               </p>
             </div>
             <div class="col-md-8 col-3">
@@ -111,11 +111,11 @@
                       <b-dropdown-item>Delete</b-dropdown-item>
                     </b-dropdown>
                     <div class="ctext-wrap">
-                      <div class="conversation-name">{{ username }}</div>
+                      <div class="conversation-name">{{ data.writer }}</div>
                       <p>{{ data.message }}</p>
                       <p class="chat-time mb-0">
                         <i class="bx bx-time-five align-middle me-1"></i>
-                                                  {{ data.timestamp }}
+                        {{ getConvertedDate(data.timestamp) }}
                       </p>
                     </div>
                   </div>
@@ -127,14 +127,14 @@
             <div class="row">
               <div class="col">
                 <input
-                      type="text"
-                      v-model="newMessage"
-                      class="form-control chat-input"
-                      placeholder="Enter Message..."
-                      :class="{
+                  type="text"
+                  v-model="newMessage"
+                  class="form-control chat-input"
+                  placeholder="Enter Message..."
+                  :class="{
                         'is-invalid': submitted && $v.form.message.$error,
                       }"
-                    />
+                />
               </div>
               <div class="col-auto">
                 <button
@@ -162,6 +162,8 @@
 import ReconnectingWebsocket from 'reconnectingwebsocket';
 import Haikunator from 'haikunator';
 import moment from 'moment';
+import {mapGetters} from "vuex";
+import DateHelper from "../../utils/functions/dateHelper";
 
 var STORAGE_KEY = "channels-example";
 var haikunator = new Haikunator();
@@ -186,10 +188,14 @@ export default {
       form: {
         message: '',
       },
-      username: 'Junshock5',
+      username: '',
     }
   },
-
+  computed: {
+    ...mapGetters([
+      'userData',
+    ]),
+  },
   watch: {
     handle(name) {
       Storage.save({name: name})
@@ -198,7 +204,7 @@ export default {
 
   methods: {
     send() {
-      var message = {
+      const message = {
         handle: this.handle,
         message: this.newMessage,
         writer: this.username
@@ -206,7 +212,10 @@ export default {
       this.chatsock.send(JSON.stringify(message));
       this.newMessage = "";
     },
-
+    getConvertedDate(dateString) {
+      const m = moment(dateString);
+      return m.format('YYYY-MM-DD HH:mm:ss');
+    },
     randomName() {
       var random = haikunator.haikunate({tokenLength: 0});
 
@@ -237,18 +246,18 @@ export default {
       return false
     }
   },
-
   mounted() {
-    var url = "api/message/?limit=50&label=" + this.$route.query.label
+    this.username = this.userData.name;
+    const url = "api/message/?limit=50&label=" + this.$route.query.label
     this.$http.get(url).then((response) => {
       this.messages = response.body
     })
     // Chat WebSocket
-    var vm = this
+    const vm = this
     this.chatsock = new ReconnectingWebsocket(window.wsRoot + '/chat' + '/' + this.$route.query.label);
 
     this.chatsock.onmessage = function (message) {
-      var data = JSON.parse(message.data);
+      const data = JSON.parse(message.data);
       vm.messages.push(data);
     };
 

@@ -62,39 +62,25 @@
                   <i class="bx bx-chat font-size-20 d-sm-none"></i>
                   <span class="d-none d-sm-block">채팅방</span>
                 </template>
-                <b-card-text>
-                  <div>
-                    <simplebar style="max-height: 410px" id="chat-list">
-                      <ul class="list-unstyled chat-list">
-                        <div class="item" v-for="room in rooms" :key="room.id" style="padding: 0 1em;">
-                          <div class="ui stackable grid">
-                            <div class="two wide column nomobile">
-                              <h3 class="ui header">{{ room.id }}</h3>
-                            </div>
-                            <div class="ten wide column">
-                            <span class="onlymobile">
-                                <i style="width: 20px; margin-right: 0;" class="black minus icon"></i><i
-                              style="width: 20px;margin-left: -10px;" class="black minus icon"></i>
-                                <router-link :to="{ name: 'room', query: { label: room.label }}">
-                                    <span style="display: inline-block; color: #000;">{{ room.label }}</span>
-                                </router-link>
-                            </span>
-                              <span class="nomobile">
-                                <span style="display: inline-block; color: #000;">{{ room.label }}</span>
-                            </span>
-                            </div>
-                            <div class="four wide column nomobile">
-                              <router-link :to="{ name: 'Room', query: { label: room.label }}">
-                                <h5 style="float: right;" class="ui green header">입장</h5>
-                              </router-link>
-                            </div>
-                          </div>
-                          <div class="ui divider" style="margin-left: -1em; margin-right: -1em;"></div>
-                        </div>
-                      </ul>
-                    </simplebar>
-                  </div>
-                </b-card-text>
+                <BaseTable
+                  :columns="itemHead"
+                  :rows="rooms"
+                  link-name="ItemDetail"
+                  :contain-external="true"
+                  :text-center-code-list="alignCenterList"
+                />
+                <b-pagination
+                  v-model="currentPage"
+                  :total-rows="totalRows"
+                  :per-page="perPage"
+                  first-text="First"
+                  prev-text="Prev"
+                  next-text="Next"
+                  last-text="Last"
+                  align="center"
+                  :hide-ellipsis="true"
+                  @page-click="changePage"
+                />
               </b-tab>
               <b-tab>
                 <template v-slot:title>
@@ -156,6 +142,10 @@
                                 <h5 style="float: right;" class="ui green header">입장</h5>
                               </router-link>
                             </div>
+                            <div class="four wide column nomobile">
+                              <h5 style="float: right;" class="ui red header"
+                                  @click="deleteRoom(room.label, this.userData.email)">삭제</h5>
+                            </div>
                           </div>
                           <div class="ui divider" style="margin-left: -1em; margin-right: -1em;"></div>
                         </div>
@@ -173,7 +163,8 @@
     <!--절취선-->
     <div class="description" style="margin-bottom: 0;">
       <p>
-        © {{ new Date().getFullYear() }} Gonghatalk Coporation. <i class="mdi mdi-heart text-danger"></i>
+        © {{ new Date().getFullYear() }} Gonghatalk. Crafted with
+        <i class="mdi mdi-heart text-danger"></i> by Themesbrand
       </p>
     </div>
   </div>
@@ -184,14 +175,17 @@
 import Vue from 'vue';
 import {mapActions, mapGetters} from "vuex";
 import RoomApi from "../../utils/apiHelper/room";
-import ContentHeader from "../../common/ContentHeader";
 import InputLabel from "../../common/InputLabel";
 import SwalHelper from "../../functions/swalHelper";
 import CookieHelper from "../../functions/cookieHelper";
+// import DateHelper from "../../utils/functions/dateHelper";
+import moment from 'moment';
+import BaseTable from "../../common/BaseTable";
 
 export default {
   components: {
     InputLabel,
+    BaseTable,
   },
   data() {
     return {
@@ -214,6 +208,24 @@ export default {
       },
       username: '관리자',
       roomName: '',
+      itemHead: [{
+        name: '방제목',
+        code: 'label',
+      }, {
+        name: '만든이',
+        code: 'userEmail',
+      }, {
+        name: '등록일',
+        code: 'timestamp',
+        filterFunc: this.getConvertedDate,
+      }, {
+        name: '입장',
+        code: 'enter',
+      }],
+      alignCenterList: ['label', 'userEmail', 'timestamp', 'enter'],
+      currentPage: 1,
+      perPage: 20,
+      totalRows: 0,
     }
   },
   computed: {
@@ -222,6 +234,9 @@ export default {
     ]),
   },
   methods: {
+    ...mapActions([
+      'setUserData',
+    ]),
     async createRoom() {
       // TODO: 유저 정보 추가해서 django에 post create room 호출하기.
       const requestCreateRoom = {
@@ -238,22 +253,29 @@ export default {
         await SwalHelper.error('방이름을 다시 입력해주세요', '');
       }
     },
+    getConvertedDate(dateString) {
+      const m = moment(dateString);
+      return m.format('YYYY-MM-DD HH:mm:ss');
+    },
     toLogin() {
       this.$router.push({name: 'Login'});
     },
-    ...mapActions([
-      'setUserData',
-    ]),
+    async changePage(ev, page) {
+      this.currentPage = page;
+      // await this.getItemList(); // 기존 검색 조건을 그대로 사용하도록 searchCriteria 를 주지 않음.
+    },
+    async deleteRoom(roomName, userEmail) {
+      // const response = await RoomApi.deleteRoom(roomName, userEmail);
+      // if (response.status == 200) {
+      //   await SwalHelper.httpResponseAlert(response, '방삭제', {
+      //     successMessage: '방삭제가 완료되었습니다.',
+      //   });
+      // }
+    },
   },
   async mounted() {
     if (CookieHelper.getCookie('email') === null) {
       this.$router.push({name: 'Login'});
-    } else {
-      // const data = {
-      //   'name': CookieHelper.getCookie('userName'),
-      //   'email': CookieHelper.getCookie('email')
-      // };
-      // await this.setUserData(data);
     }
     // 전체 리스트
     let response = await RoomApi.getRoomList(this.userData);
@@ -282,7 +304,7 @@ a {
 .description {
   margin-top: 2em;
   margin-bottom: 2em;
-  font-size: 2em;
+  font-size: 1em;
   line-height: 150%;
 }
 
