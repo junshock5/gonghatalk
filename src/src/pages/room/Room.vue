@@ -5,7 +5,7 @@
         <div class="p-4 border-bottom">
           <div class="row">
             <div class="col-md-4 col-9">
-<!--              <h5 class="font-size-15 mb-1">{{ username }}</h5>-->
+              <!--              <h5 class="font-size-15 mb-1">{{ username }}</h5>-->
               <p class="text-muted mb-0">
                 <i class="mdi mdi-circle text-success align-middle me-1"></i>
                 채팅방명: {{ $route.query.label }}
@@ -80,11 +80,11 @@
         </div>
 
         <div class="chat-users">
-          <div class="chat-conversation p-3">
+          <div v-model="scrollDiv" class="chat-conversation p-3" style="height: 470px;overflow:auto;" ref="msgContainer"
+               id="container">
             <simplebar
-              style="max-height: 470px"
               id="containerElement"
-              ref="current"
+              ref="currentMenu"
             >
               <ul class="list-unstyled">
                 <li>
@@ -139,7 +139,7 @@
               <div class="col-auto">
                 <button
                   @click="send"
-                  v-on:keyup.enter="send"
+                  v-on:keydown.enter="send"
                   class="btn btn-primary btn-rounded chat-send w-md"
                 >
                   <span
@@ -185,6 +185,7 @@ export default {
       messages: [],
       handle: '',
       newMessage: "",
+      scrollDiv: "",
       form: {
         message: '',
       },
@@ -199,9 +200,8 @@ export default {
   watch: {
     handle(name) {
       Storage.save({name: name})
-    }
+    },
   },
-
   methods: {
     send() {
       const message = {
@@ -211,10 +211,13 @@ export default {
       }
       this.chatsock.send(JSON.stringify(message));
       this.newMessage = "";
+      this.changeScroll();
     },
     getConvertedDate(dateString) {
-      const m = moment(dateString);
-      return m.format('YYYY-MM-DD HH:mm:ss');
+      const year = dateString.substr(4, 7);
+      const day = dateString.substr(0, 3);
+      const hour = dateString.substr(8, dateString.length);
+      return year + day + hour;
     },
     randomName() {
       var random = haikunator.haikunate({tokenLength: 0});
@@ -233,18 +236,10 @@ export default {
         this.randomName()
       }
     },
-
-    timeFormat(time) {
-      return moment(moment.utc(time, 'lll')._d).format('lll')
+    changeScroll() {
+      const container = this.$refs.msgContainer;
+      container.scrollTop = this.$refs.msgContainer.scrollHeight;
     },
-
-    isNew(message) {
-      var ms = moment.utc().diff(moment.utc(message.timestamp, 'lll'))
-      if (ms / 1000 < 60) {
-        return true
-      }
-      return false
-    }
   },
   mounted() {
     this.username = this.userData.name;

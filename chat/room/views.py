@@ -36,3 +36,16 @@ def myRoomList(request):
             if email == temp['userEmail']:
                 response.append(temp)
     return Response(response, status=status.HTTP_200_OK)
+
+
+@csrf_exempt
+@api_view(['DELETE'])
+def room(request):
+    assert request is not None
+    if request.method == 'DELETE':
+        qs = Room.objects.all()
+        list = json.loads(serializers.serialize('json', qs))
+        response = []
+        for i in range(len(list)):
+            response.append(list[i].get('fields'))
+    return Response(response, status=status.HTTP_200_OK)

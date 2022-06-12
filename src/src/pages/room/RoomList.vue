@@ -139,11 +139,11 @@
                             </div>
                             <div class="four wide column nomobile">
                               <router-link :to="{ name: 'Room', query: { label: room.label }}">
-                                <h5 style="float: right;" class="ui green header">입장</h5>
+                                <h5 class="ui green header">입장</h5>
                               </router-link>
                             </div>
                             <div class="four wide column nomobile">
-                              <h5 style="float: right;" class="ui red header"
+                              <h5 class="ui red header"
                                   @click="deleteRoom(room.label, this.userData.email)">삭제</h5>
                             </div>
                           </div>
